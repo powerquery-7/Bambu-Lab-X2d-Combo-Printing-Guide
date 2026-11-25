@@ -1,0 +1,2473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bambu Lab X2D Combo &amp; AMS 2 Pro — Master Reference Suite</title>
+<style>
+  :root {
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text: #0f172a;
+    --text-muted: #475569;
+    --accent: #0f766e;
+    --accent-light: #f0fdfa;
+    --accent-dark: #115e59;
+    --header-bg: #1e293b;
+    --header-text: #ffffff;
+    --stripe: #f8fafc;
+    --hover: #f1f5f9;
+    --code-bg: #0f172a;
+    --code-text: #e2e8f0;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* Top Navigation Bar */
+  .top-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--header-bg);
+    color: var(--header-text);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
+  }
+
+  .top-bar-inner {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 14px 24px 0 24px;
+  }
+
+  .brand-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .brand-title {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #ffffff;
+  }
+
+  .brand-subtitle {
+    font-size: 12px;
+    color: #94a3b8;
+  }
+
+  .top-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .btn-print {
+    background: rgba(255, 255, 255, 0.1);
+    color: #f8fafc;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .btn-print:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  /* Tabs */
+  .tab-bar {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tab-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-btn {
+    appearance: none;
+    border: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: #cbd5e1;
+    padding: 10px 18px;
+    font-size: 13.5px;
+    font-weight: 600;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+    border-bottom: 3px solid transparent;
+  }
+
+  .tab-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+  }
+
+  .tab-btn.active {
+    background: var(--bg);
+    color: var(--accent-dark);
+    border-bottom: 3px solid var(--accent);
+  }
+
+  /* Main Container */
+  .main-wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+
+  .tab-panel {
+    display: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 36px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+  }
+
+  .tab-panel.active {
+    display: block;
+  }
+
+  /* Typography */
+  h1 {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--text);
+    margin: 28px 0 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-strong);
+    letter-spacing: -0.02em;
+  }
+
+  h1:first-child {
+    margin-top: 0;
+  }
+
+  h2 {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--accent-dark);
+    margin: 24px 0 10px 0;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 18px 0 8px 0;
+  }
+
+  h4 {
+    font-size: 14.5px;
+    font-weight: 700;
+    color: #334155;
+    margin: 14px 0 6px 0;
+  }
+
+  p {
+    margin: 0 0 12px 0;
+  }
+
+  ul, ol {
+    margin: 0 0 14px 0;
+    padding-left: 24px;
+  }
+
+  li {
+    margin-bottom: 6px;
+  }
+
+  li > ul, li > ol {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+
+  hr.section-divider {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 28px 0;
+  }
+
+  /* ASCII Diagrams */
+  pre.ascii-diagram {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 18px 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: "Cascadia Code", "Fira Code", Consolas, "Courier New", monospace;
+    font-size: 12.5px;
+    line-height: 1.4;
+    margin: 18px 0;
+    border: 1px solid #334155;
+  }
+
+  /* Table Toolbar & Responsive Wide Tables */
+  .table-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 18px 0 8px 0;
+    padding: 10px 14px;
+    background: #f1f5f9;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .table-badge {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #334155;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .table-search {
+    padding: 6px 12px;
+    border: 1px solid var(--border-strong);
+    border-radius: 6px;
+    font-size: 13px;
+    width: 280px;
+    max-width: 100%;
+    background: #ffffff;
+    color: var(--text);
+  }
+
+  .table-search:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+  }
+
+  .table-container {
+    width: 100%;
+    max-height: 76vh;
+    overflow: auto;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    margin-bottom: 24px;
+    background: #ffffff;
+  }
+
+  table.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  table.data-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--header-bg);
+    color: #ffffff;
+    font-weight: 700;
+    text-align: left;
+    padding: 11px 12px;
+    border-bottom: 2px solid #0f172a;
+    border-right: 1px solid #334155;
+    white-space: nowrap;
+  }
+
+  table.data-table thead th:last-child {
+    border-right: none;
+  }
+
+  table.data-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    vertical-align: top;
+    min-width: 130px;
+  }
+
+  table.data-table tbody td:first-child {
+    font-weight: 600;
+    background: #f8fafc;
+    min-width: 110px;
+  }
+
+  table.data-table tbody td:last-child {
+    border-right: none;
+    min-width: 210px;
+  }
+
+  table.data-table tbody tr:nth-child(even) td {
+    background: var(--stripe);
+  }
+
+  table.data-table tbody tr:hover td {
+    background: var(--accent-light);
+  }
+
+  /* Compact column sizing for ID columns */
+  #tab3_tbl_1 tbody td:first-child,
+  #tab3_tbl_2 tbody td:first-child,
+  #tab3_tbl_3 tbody td:first-child {
+    min-width: 52px;
+    width: 52px;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .tab-panel {
+      padding: 18px 16px;
+    }
+    .main-wrapper {
+      padding: 12px;
+    }
+  }
+
+  @media print {
+    .top-bar, .table-toolbar {
+      display: none !important;
+    }
+    .tab-panel {
+      border: none;
+      box-shadow: none;
+      padding: 0;
+    }
+    .table-container {
+      max-height: none;
+      overflow: visible;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header class="top-bar">
+  <div class="top-bar-inner">
+    <div class="brand-row">
+      <div>
+        <div class="brand-title">Bambu Lab X2D Combo &amp; AMS 2 Pro — Master Reference Suite</div>
+        <div class="brand-subtitle">Consolidated Filament Guide, Polymaker Playbook &amp; Slicer Diagnostic Manual</div>
+      </div>
+      <div class="top-actions">
+        <button class="btn-print" onclick="window.print()">Print Active Tab</button>
+      </div>
+    </div>
+    <nav class="tab-bar" role="tablist">
+      <button class="tab-btn active" role="tab" aria-selected="true" onclick="switchTab('tab1', this)">
+        1. Beginner's Filament Guide (39 Materials)
+      </button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('tab2', this)">
+        2. Polymaker Project Playbook
+      </button>
+      <button class="tab-btn" role="tab" aria-selected="false" onclick="switchTab('tab3', this)">
+        3. Bambu Studio Manual &amp; Diagnostics
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="main-wrapper">
+  <section id="tab1" class="tab-panel active" role="tabpanel">
+    <h1><strong>Bambu Lab X2D Combo &amp; AMS 2 Pro Setup &amp; Filament Guide</strong></h1>
+<p>Welcome to your complete resource for mastering the <strong>Bambu Lab X2D Combo</strong> with the <strong>AMS 2 Pro</strong>. This guide breaks down hardware system rules, support materials, filament selection, brand performance in the Philippine market, and optimal print settings for beginner and advanced users.</p>
+<hr class="section-divider">
+<h1><strong>1. System Overview &amp; Critical Hardware Rules</strong></h1>
+<p>The Bambu Lab X2D Combo combines high-speed multi-material printing with active thermal management. Understanding how the hardware components interact ensures optimal print quality and prevents nozzle or feeder jams.</p>
+<h2><strong>Core Hardware Components</strong></h2>
+<ul>
+<li><strong>X2D 300°C Direct-Drive Main Nozzle</strong>: Handles primary structural, aesthetic, high-temperature, and composite engineering materials up to 300°C.</li>
+<li><strong>X2D Bowden Auxiliary Nozzle</strong>: A secondary nozzle dedicated to multi-material support interfaces. Heating up to 250°C, it prevents cross-contamination between support interface materials and primary print paths.</li>
+<li><strong>X2D 65°C Actively Heated Chamber</strong>: Maintains stable ambient temperatures during printing. This minimizes warping and thermal shock for high-temperature engineering filaments like ABS, ASA, PC, and PA.</li>
+<li><strong>AMS 2 Pro Automated Material System</strong>: A 4-slot automated feeder equipped with <strong>65°C active drying capabilities</strong>. It automatically feeds, retracts, and keeps sensitive materials dry during multi-color or multi-material prints.</li>
+</ul>
+<h2><strong>Key Hardware Rules</strong></h2>
+<ol>
+<li><strong>Nozzle Assignment Standard</strong>:</li>
+<ul>
+<li><strong>Main Nozzle</strong>: Handles all primary build materials (PLA, PETG, ABS, ASA, TPU, PC, PA composites).</li>
+<li><strong>Auxiliary Nozzle</strong>: Strictly reserved for <strong>dedicated support interface materials</strong> (Bambu Support for PLA, Support for PLA/PETG, PVA) or standard standard PLA used as a support layer. <em>Do not run abrasive fiber composites or high-temperature engineering filaments (&gt;250°C) through the auxiliary Bowden system.</em></li>
+</ul>
+<li><strong>TPU Feeding Rules</strong>:</li>
+<ul>
+<li><strong>AMS 2 Pro Compatible</strong>: <strong>Bambu TPU for AMS (68D Semi-Rigid)</strong> is the <em>only</em> TPU approved for use inside the AMS 2 Pro internal feed paths.</li>
+<li><strong>External Spool Requirement</strong>: All soft, generic, or flexible TPUs (<strong>85A, 90A, 95A</strong>) must be fed externally via the rear spool holder directly into the Main Direct-Drive Extruder. <em>Soft TPU will buckle, wrap, and jam inside the AMS 2 Pro internal PTFE tubes and track switches.</em></li>
+</ul>
+</ol>
+<hr class="section-divider">
+<h1><strong>2. Bambu Lab Support Filaments for PLA</strong></h1>
+<p>Using dedicated support interface materials allows for zero-clearance (0 mm top Z-distance) support placement. This produces perfectly flat horizontal overhang surfaces without scarring or fusing.</p>
+<h2><strong>Support Material Options</strong></h2>
+<ul>
+<li><strong>Bambu Support for PLA (New Version)</strong></li>
+<ul>
+<li><em>Type</em>: Breakaway support interface material engineered specifically for PLA.</li>
+<li><em>Properties</em>: Prints at 190–220°C. Does not fuse chemically to PLA, allowing clean hand-peeling or removal with standard pliers.</li>
+<li><em>Price Range</em>: ~₱1,050 – ₱1,800 per 0.5 kg spool.</li>
+<li><em>Hardware Usage</em>: Loaded into AMS 2 Pro; printed via X2D Main or Auxiliary nozzle. Applied only to the interface layers.</li>
+</ul>
+<li><strong>Bambu Support for PLA/PETG</strong></li>
+<ul>
+<li><em>Type</em>: Dual-compatibility breakaway support interface material.</li>
+<li><em>Properties</em>: Weak adhesion interface for both PLA and PETG models.</li>
+<li><em>Price Range</em>: ~₱1,800 – ₱3,700 per 0.5 kg spool.</li>
+<li><em>Hardware Usage</em>: Loaded into AMS 2 Pro; printed via X2D Main or Auxiliary nozzle.</li>
+</ul>
+<li><strong>Bambu PVA (Polyvinyl Alcohol)</strong></li>
+<ul>
+<li><em>Type</em>: Cold/warm water-soluble support material.</li>
+<li><em>Properties</em>: Dissolves completely in water without leaving chemical residue. Essential for complex internal cavities, trapped geometry, or delicate organic overhangs where mechanical removal tools cannot reach.</li>
+<li><em>Price Range</em>: ~₱1,750 per 0.5 kg spool.</li>
+<li><em>Hardware Usage</em>: Loaded into AMS 2 Pro (must be kept dry using the 65°C drying function); printed via X2D Main or Auxiliary nozzle.</li>
+</ul>
+</ul>
+<h2><strong>Cost-Savings Tip for Beginners</strong></h2>
+<p>You can achieve clean support removal without buying dedicated support filaments by using <strong>PETG as a support interface for PLA prints</strong>, or <strong>PLA as a support interface for PETG prints</strong>.</p>
+<p>Because PLA and PETG do not bond chemically to each other, setting a <strong>0 mm Top Z-Distance</strong> and assigning the alternate material to the support interface creates a rigid, flat platform that breaks cleanly away after cooling.</p>
+<hr class="section-divider">
+<h1><strong>3. Master Filament Comparison Table</strong></h1>
+<p><em>Note on Load Capacity:</em> Cantilever values represent estimated load limits on a standard 1-ft (305 mm) printed solid bracket (20 mm x 20 mm cross-section) loaded at the free end, assuming ideal horizontal layer orientation (load applied perpendicular to layer lines).</p>
+<div class="table-toolbar">
+<span class="table-badge">Table 1 &middot; 39 rows</span>
+<input type="text" class="table-search" placeholder="Filter rows in this table..." oninput="filterTable('tab1_tbl_1', this.value)">
+</div>
+<div class="table-container"><table id="tab1_tbl_1" class="data-table"><thead><tr>
+<th>Filament Type (Group)</th>
+<th>Filament Variant</th>
+<th>Brands Selling It</th>
+<th>Sample Applications</th>
+<th>Avg. Price (PHP / 1 kg)</th>
+<th>Strength &amp; 1-ft (305 mm) Cantilever Load Capacity</th>
+<th>X2D &amp; AMS 2 Pro Compatibility</th>
+<th>Required Setup Instructions</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>PLA (Polylactic Acid)</strong></td>
+<td>PLA Basic / Standard</td>
+<td>• Bambu Lab<br>• eSUN<br>• SUNLU<br>• Polymaker</td>
+<td>Desk organizers, prototypes, toys, light-duty brackets</td>
+<td>₱650 – ₱900</td>
+<td><strong>High Stiffness</strong>: ~60–65 MPa tensile. Holds <strong>2.5–4.0 kg</strong> before brittle snap. Softens &gt;55°C.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: Yes<br>AMS 2 Pro: Yes</td>
+<td><strong>Nozzle</strong>: 0.4mm Stainless/Hardened<br><strong>Plate</strong>: PEI (35–65°C)<br><strong>Chamber</strong>: Off / Vented</td>
+</tr>
+<tr>
+<td><strong>PLA (Polylactic Acid)</strong></td>
+<td>PLA+ / Tough PLA / Pro PLA</td>
+<td>• eSUN (PLA+)<br>• Polymaker (PolyMax)<br>• Bambu Lab (Tough PLA)<br>• SUNLU</td>
+<td>Functional prototypes, snap-fit assemblies, mechanical enclosures</td>
+<td>₱750 – ₱1,200</td>
+<td><strong>Higher Toughness</strong>: ~65–70 MPa tensile. Holds <strong>3.5–5.0 kg</strong>. Absorbs 2x more impact than basic PLA.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: Yes<br>AMS 2 Pro: Yes</td>
+<td><strong>Nozzle</strong>: 0.4mm Stainless/Hardened<br><strong>Plate</strong>: PEI (45–60°C)<br><strong>Chamber</strong>: Off / Vented</td>
+</tr>
+<tr>
+<td><strong>PLA (Polylactic Acid)</strong></td>
+<td>PLA Matte</td>
+<td>• Bambu Lab<br>• Polymaker (PolyTerra)<br>• eSUN<br>• SUNLU</td>
+<td>Architectural models, decorative displays, hidden-layer-line prints</td>
+<td>₱750 – ₱1,050</td>
+<td><strong>Moderate Rigidity</strong>: ~45–55 MPa tensile. Holds <strong>2.0–3.0 kg</strong>. Slightly reduced layer bonding.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: Yes<br>AMS 2 Pro: Yes</td>
+<td><strong>Nozzle</strong>: 0.4mm Stainless/Hardened<br><strong>Plate</strong>: Textured PEI (45–60°C)<br><strong>Chamber</strong>: Off / Vented</td>
+</tr>
+<tr>
+<td><strong>PLA (Polylactic Acid)</strong></td>
+<td>PLA Silk / Dual-Color / Tri-Color</td>
+<td>• Bambu Lab<br>• eSUN<br>• SUNLU<br>• Polymaker</td>
+<td>Statues, vases, cosplay props, iridescent art pieces</td>
+<td>₱800 – ₱1,200</td>
+<td><strong>Decorative / Brittle</strong>: ~35–45 MPa tensile. Holds <strong>1.0–2.0 kg</strong>. Elastomer additives weaken z-adhesion.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: Yes<br>AMS 2 Pro: Yes</td>
+<td><strong>Nozzle</strong>: 0.4mm (210–230°C)<br><strong>Speed</strong>: Slow outer wall for maximum gloss<br><strong>Plate</strong>: PEI (50–60°C)</td>
+</tr>
+<tr>
+<td><strong>PLA (Polylactic Acid)</strong></td>
+<td>PLA Wood / Marble / Metal-Filled / Glow / Sparkle</td>
+<td>• Bambu Lab<br>• eSUN<br>• Polymaker<br>• SUNLU</td>
+<td>Specialty aesthetic models, wood-like carvings, stone textures</td>
+<td>₱850 – ₱1,400</td>
+<td><strong>Low Structural Strength</strong>: ~30–40 MPa tensile. Holds <strong>1.0–1.8 kg</strong>. Particulates increase brittleness.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: Avoid Wood/Glow (Abrasive/Clog risk)</td>
+<td><strong>Nozzle</strong>: 0.4mm/0.6mm Hardened Steel<br><strong>Feed</strong>: External Spool recommended for Wood/Glow<br><strong>Plate</strong>: PEI (50–60°C)</td>
+</tr>
+<tr>
+<td><strong>PLA (Polylactic Acid)</strong></td>
+<td>PLA-CF / PLA-GF (Carbon/Glass Fiber)</td>
+<td>• Bambu Lab<br>• eSUN<br>• Polymaker</td>
+<td>Rigid drone frames, RC components, matte functional jigs</td>
+<td>₱1,100 – ₱1,600</td>
+<td><strong>High Rigidity</strong>: ~55–70 MPa tensile. Holds <strong>4.0–5.5 kg</strong>. Minimal flex under load.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: Bambu PLA-CF ONLY (3rd party External)</td>
+<td><strong>Nozzle</strong>: 0.4mm/0.6mm Hardened Steel<br><strong>Plate</strong>: PEI (45–65°C)<br><strong>Drying</strong>: 55°C for 4–6 hrs</td>
+</tr>
+<tr>
+<td><strong>PLA (Polylactic Acid)</strong></td>
+<td>PLA Aero / LW-PLA (Lightweight Foaming)</td>
+<td>• Bambu Lab<br>• eSUN (ePLA-LW)<br>• Polymaker</td>
+<td>RC plane wings, gliders, lightweight cosplay armor</td>
+<td>₱1,300 – ₱1,800</td>
+<td><strong>Ultra-Low Density</strong>: ~15–25 MPa tensile. Holds <strong>0.5–1.0 kg</strong>. Built for weight savings.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: NO (Foaming jams feeding paths)</td>
+<td><strong>Nozzle</strong>: 0.4mm (230–250°C to activate foam)<br><strong>Feed</strong>: External Spool Holder ONLY<br><strong>Flow Rate</strong>: Reduce to ~50–60%</td>
+</tr>
+<tr>
+<td><strong>PLA (Polylactic Acid)</strong></td>
+<td>High-Speed / Rapid PLA (Hyper PLA)</td>
+<td>• Creality (Hyper)<br>• eSUN (ePLA-HS)<br>• SUNLU (Meta)<br>• Elegoo</td>
+<td>High-speed structural prototyping (300–500 mm/s)</td>
+<td>₱700 – ₱1,000</td>
+<td><strong>Standard PLA Strength</strong>: ~60 MPa tensile. Holds <strong>2.5–3.8 kg</strong>. High fluidity maintains layer strength at speed.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: Yes<br>AMS 2 Pro: Yes</td>
+<td><strong>Nozzle</strong>: 0.4mm (210–240°C)<br><strong>Plate</strong>: PEI (45–60°C)<br><strong>Chamber</strong>: Off / Vented</td>
+</tr>
+<tr>
+<td><strong>PETG (Polyethylene Terephthalate Glycol)</strong></td>
+<td>PETG Basic / Standard</td>
+<td>• Bambu Lab<br>• eSUN<br>• SUNLU<br>• Polymaker</td>
+<td>Outdoor planters, water-tight containers, snap-fit clips</td>
+<td>₱680 – ₱950</td>
+<td><strong>Ductile &amp; Tough</strong>: ~50–55 MPa tensile. Holds <strong>3.0–4.5 kg</strong>. Bends before fracture; heat resistant ~75°C.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: Yes<br>AMS 2 Pro: Yes</td>
+<td><strong>Nozzle</strong>: 0.4mm Stainless/Hardened<br><strong>Plate</strong>: Textured PEI (70–80°C)<br><strong>Drying</strong>: 65°C for 6–8 hrs (Crucial)</td>
+</tr>
+<tr>
+<td><strong>PETG (Polyethylene Terephthalate Glycol)</strong></td>
+<td>PETG HF (High Flow / Rapid) / PETG+</td>
+<td>• Bambu Lab (PETG HF)<br>• eSUN<br>• Polymaker</td>
+<td>High-speed functional parts, printer structural upgrades</td>
+<td>₱850 – ₱1,150</td>
+<td><strong>High Impact</strong>: ~52–58 MPa tensile. Holds <strong>3.5–4.8 kg</strong>. Optimized melt flow prevents stringing at high speeds.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: Yes<br>AMS 2 Pro: Yes</td>
+<td><strong>Nozzle</strong>: 0.4mm (230–260°C)<br><strong>Plate</strong>: Textured PEI (70–80°C)<br><strong>Drying</strong>: 65°C for 6–8 hrs</td>
+</tr>
+<tr>
+<td><strong>PETG (Polyethylene Terephthalate Glycol)</strong></td>
+<td>PETG Translucent / Clear</td>
+<td>• Bambu Lab<br>• eSUN<br>• SUNLU<br>• Polymaker</td>
+<td>Light diffusers, fluid reservoirs, transparent housings</td>
+<td>₱700 – ₱1,000</td>
+<td><strong>Standard PETG Strength</strong>: ~50 MPa tensile. Holds <strong>3.0–4.2 kg</strong>. Optical clarity improved by high flow/100% infill.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: Yes<br>AMS 2 Pro: Yes</td>
+<td><strong>Nozzle</strong>: 0.4mm/0.6mm (240–255°C)<br><strong>Plate</strong>: Smooth PEI (75–85°C) + Glue<br><strong>Speed</strong>: Slow for clarity</td>
+</tr>
+<tr>
+<td><strong>PETG (Polyethylene Terephthalate Glycol)</strong></td>
+<td>PETG-CF / PETG-GF (Carbon/Glass Fiber)</td>
+<td>• Bambu Lab<br>• eSUN<br>• Polymaker</td>
+<td>Structural outdoor brackets, automotive interior clips, jigs</td>
+<td>₱1,200 – ₱1,800</td>
+<td><strong>High Rigidity &amp; Toughness</strong>: ~60–70 MPa tensile. Holds <strong>5.0–6.5 kg</strong> with lower sag than standard PETG.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: Bambu PETG-CF ONLY (3rd party External)</td>
+<td><strong>Nozzle</strong>: 0.4mm/0.6mm Hardened Steel<br><strong>Plate</strong>: Textured PEI (70–80°C)<br><strong>Drying</strong>: 65°C for 8 hrs</td>
+</tr>
+<tr>
+<td><strong>ABS (Acrylonitrile Butadiene Styrene)</strong></td>
+<td>ABS Basic / Standard</td>
+<td>• Bambu Lab<br>• eSUN<br>• SUNLU<br>• Polymaker</td>
+<td>Enclosures, gears, high-impact housings, tool handles</td>
+<td>₱700 – ₱1,000</td>
+<td><strong>Impact Resistant</strong>: ~40–50 MPa tensile. Holds <strong>3.0–4.0 kg</strong>. High shock absorption; withstands ~95°C.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: Yes</td>
+<td><strong>Nozzle</strong>: 0.4mm (240–270°C)<br><strong>Plate</strong>: PEI (90–100°C) + Glue<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong><br><strong>Safety</strong>: Room ventilation (VOCs)</td>
+</tr>
+<tr>
+<td><strong>ABS (Acrylonitrile Butadiene Styrene)</strong></td>
+<td>ABS+ (Modified Low-Warp ABS)</td>
+<td>• eSUN (ABS+)<br>• Polymaker<br>• SUNLU</td>
+<td>Large functional enclosures, mechanical brackets, structural components</td>
+<td>₱800 – ₱1,150</td>
+<td><strong>Improved Ductility</strong>: ~45–52 MPa tensile. Holds <strong>3.2–4.3 kg</strong>. Lower thermal shrink/warping than basic ABS.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: Yes</td>
+<td><strong>Nozzle</strong>: 0.4mm (240–265°C)<br><strong>Plate</strong>: PEI (90–100°C) + Glue<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong></td>
+</tr>
+<tr>
+<td><strong>ABS (Acrylonitrile Butadiene Styrene)</strong></td>
+<td>ABS-GF / ABS-CF (Glass/Carbon Fiber)</td>
+<td>• Bambu Lab (ABS-GF)<br>• eSUN<br>• Polymaker</td>
+<td>Automotive interior parts, high-rigidity structural shells, drone plates</td>
+<td>₱1,200 – ₱1,800</td>
+<td><strong>High Stiff Strength</strong>: ~55–65 MPa tensile. Holds <strong>4.5–6.0 kg</strong>. Zero warp with active chamber heating.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: Bambu ABS-GF ONLY (3rd party External)</td>
+<td><strong>Nozzle</strong>: 0.4mm/0.6mm Hardened Steel<br><strong>Plate</strong>: PEI (95–100°C) + Glue<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong></td>
+</tr>
+<tr>
+<td><strong>ASA (Acrylonitrile Styrene Acrylate)</strong></td>
+<td>ASA Standard (UV/Weather Resistant)</td>
+<td>• Bambu Lab<br>• eSUN<br>• Polymaker<br>• SUNLU</td>
+<td>Outdoor fixtures, marine components, car exterior trim, solar mounts</td>
+<td>₱950 – ₱1,400</td>
+<td><strong>Weatherproof</strong>: ~45–55 MPa tensile. Holds <strong>3.5–5.0 kg</strong>. Outstanding UV stability and thermal resistance (~95°C).</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: Yes</td>
+<td><strong>Nozzle</strong>: 0.4mm Stainless/Hardened<br><strong>Plate</strong>: PEI (95–100°C) + Glue<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong></td>
+</tr>
+<tr>
+<td><strong>ASA (Acrylonitrile Styrene Acrylate)</strong></td>
+<td>ASA-CF / ASA-Aero (Carbon Fiber/LW)</td>
+<td>• Polymaker<br>• eSUN<br>• Bambu Lab</td>
+<td>Lightweight outdoor drone components, matte automotive brackets</td>
+<td>₱1,300 – ₱1,900</td>
+<td><strong>Rigid &amp; UV Stable</strong>: ~60–68 MPa tensile. Holds <strong>5.0–6.2 kg</strong>. Zero warp under active chamber heating.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: External Spool ONLY (Fiber abrasion)</td>
+<td><strong>Nozzle</strong>: 0.4mm/0.6mm Hardened Steel<br><strong>Plate</strong>: PEI (95–105°C)<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong></td>
+</tr>
+<tr>
+<td><strong>TPU / TPE (Flexible Elastomers)</strong></td>
+<td>TPU for AMS (68D Semi-Rigid)</td>
+<td>• Bambu Lab</td>
+<td>Protective phone cases, living hinges, drive belts, solid wheels</td>
+<td>₱1,300 – ₱1,600</td>
+<td><strong>Semi-Rigid Elastomer</strong>: ~35–45 MPa tensile, Shore 68D. Bends under <strong>1.5–2.5 kg</strong> without tearing.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: YES (Only TPU cleared for AMS)</td>
+<td><strong>Nozzle</strong>: 0.4mm Stainless/Hardened<br><strong>Plate</strong>: PEI (30–35°C)<br><strong>Drying</strong>: 60–65°C active drying in AMS</td>
+</tr>
+<tr>
+<td><strong>TPU / TPE (Flexible Elastomers)</strong></td>
+<td>TPU 95A (Standard Flexible)</td>
+<td>• eSUN (eTPU-95A)<br>• SUNLU<br>• Polymaker<br>• Overture</td>
+<td>Vibration dampers, drone bumpers, gaskets, shoe soles, RC tires</td>
+<td>₱850 – ₱1,400</td>
+<td><strong>Highly Elastic</strong>: ~30–38 MPa tensile, Shore 95A. Deflects under <strong>&lt;0.8 kg</strong>; zero fracture.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: NO (Will buckle/jam AMS paths)</td>
+<td><strong>Nozzle</strong>: 0.4mm/0.6mm (220–240°C)<br><strong>Feed</strong>: External Spool direct to Main Extruder<br><strong>Plate</strong>: PEI (30–45°C) + Glue</td>
+</tr>
+<tr>
+<td><strong>TPU / TPE (Flexible Elastomers)</strong></td>
+<td>Soft TPU / TPE (82A – 90A Ultra-Flexible)</td>
+<td>• NinjaTek (NinjaFlex)<br>• Polymaker<br>• eSUN</td>
+<td>Ultra-soft seals, flexible orthotics, suction cups, squishy prototypes</td>
+<td>₱1,400 – ₱2,600</td>
+<td><strong>Ultra-Elastic</strong>: ~20–30 MPa tensile, Shore 82A–90A. Droops under self-weight (<strong>&lt;0.3 kg</strong>).</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: NO (Causes severe feeder wrapping)</td>
+<td><strong>Nozzle</strong>: 0.4mm/0.6mm (Slow speed 15–30 mm/s)<br><strong>Feed</strong>: Direct top external feed<br><strong>Retraction</strong>: Disabled</td>
+</tr>
+<tr>
+<td><strong>PC (Polycarbonate)</strong></td>
+<td>PC Basic / PolyMax PC (Impact-Modified)</td>
+<td>• Polymaker (PolyMax PC)<br>• Bambu Lab<br>• eSUN</td>
+<td>Heavy-duty structural gears, clear safety shields, high-load brackets</td>
+<td>₱1,400 – ₱2,200</td>
+<td><strong>High Thermal/Structural</strong>: ~60–72 MPa tensile. Holds <strong>5.5–7.5 kg</strong>. Heat deflection to ~110°C.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: Yes</td>
+<td><strong>Nozzle</strong>: 0.4mm Hardened Steel (270–295°C)<br><strong>Plate</strong>: PEI (100–110°C) + Glue<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong><br><strong>Drying</strong>: 75–80°C (Crucial)</td>
+</tr>
+<tr>
+<td><strong>PC (Polycarbonate)</strong></td>
+<td>PC-FR (Flame Retardant)</td>
+<td>• Polymaker<br>• Bambu Lab</td>
+<td>UL94 V-0 flame-rated electronics enclosures, battery housings, EV parts</td>
+<td>₱2,200 – ₱3,500</td>
+<td><strong>Flame Resistant Structural</strong>: ~65 MPa tensile. Holds <strong>5.5–7.0 kg</strong>. Self-extinguishing properties.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: Yes</td>
+<td><strong>Nozzle</strong>: 0.4mm Hardened Steel (280–300°C)<br><strong>Plate</strong>: PEI (105–115°C) + Glue<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong></td>
+</tr>
+<tr>
+<td><strong>PC (Polycarbonate)</strong></td>
+<td>PC-CF / PC-ABS Blend</td>
+<td>• Polymaker<br>• eSUN<br>• Bambu Lab</td>
+<td>Rigid high-temperature automotive clips, lightweight structural frames</td>
+<td>₱1,800 – ₱2,800</td>
+<td><strong>Ultra Rigid Composite</strong>: ~70–82 MPa tensile. Holds <strong>6.5–8.5 kg</strong>. Lower warping than raw PC.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: External Spool ONLY (CF wear)</td>
+<td><strong>Nozzle</strong>: 0.4mm/0.6mm Hardened Steel (285–300°C)<br><strong>Plate</strong>: PEI (100–110°C) + Glue<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong></td>
+</tr>
+<tr>
+<td><strong>PA / Nylon (Polyamide)</strong></td>
+<td>PA6 / PA12 Unreinforced Nylon</td>
+<td>• Polymaker<br>• eSUN<br>• Taulman3D</td>
+<td>High-fatigue gears, low-friction bushings, snap-fit functional latches</td>
+<td>₱1,600 – ₱2,600</td>
+<td><strong>Fatigue Resistant</strong>: ~55–65 MPa tensile. Holds <strong>4.0–6.0 kg</strong>. Highly ductile; flexes under heavy shock.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: Yes (Must dry continuously)</td>
+<td><strong>Nozzle</strong>: 0.4mm (260–290°C)<br><strong>Plate</strong>: PEI (80–100°C) + PVA Magigoo Glue<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong></td>
+</tr>
+<tr>
+<td><strong>PA / Nylon (Polyamide)</strong></td>
+<td>PA6-CF / PA6-GF (Carbon/Glass Fiber Nylon 6)</td>
+<td>• Polymaker (Fiberon)<br>• eSUN<br>• Bambu Lab</td>
+<td>Industrial end-use tooling, robotic arms, automotive engine bay brackets</td>
+<td>₱2,400 – ₱4,200</td>
+<td><strong>Extreme Rigidity</strong>: ~90–110 MPa tensile. Holds <strong>9.0–12.0 kg</strong>. Heat deflection up to ~175°C.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: External Spool ONLY (Abrasive)</td>
+<td><strong>Nozzle</strong>: 0.4mm/0.6mm Hardened Steel (280–300°C)<br><strong>Plate</strong>: PEI (90–100°C) + Glue<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong><br><strong>Drying</strong>: 80°C 12 hrs</td>
+</tr>
+<tr>
+<td><strong>PA / Nylon (Polyamide)</strong></td>
+<td>PA12-CF (Low-Moisture Carbon Fiber Nylon 12)</td>
+<td>• Polymaker<br>• eSUN</td>
+<td>Dimensionally stable outdoor drone components, moisture-exposed gears</td>
+<td>₱2,800 – ₱4,500</td>
+<td><strong>High Structural Stability</strong>: ~80–95 MPa tensile. Holds <strong>8.0–10.5 kg</strong>. Minimal moisture absorption.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: External Spool ONLY</td>
+<td><strong>Nozzle</strong>: 0.4mm/0.6mm Hardened Steel (275–295°C)<br><strong>Plate</strong>: PEI (90–100°C) + Glue<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong></td>
+</tr>
+<tr>
+<td><strong>PA / Nylon (Polyamide)</strong></td>
+<td>PAHT-CF (High-Temp Nylon CF)</td>
+<td>• Bambu Lab<br>• Polymaker</td>
+<td>Continuous high-temperature manufacturing jigs, motor mounts</td>
+<td>₱3,200 – ₱4,500</td>
+<td><strong>Maximum Tensile Yield</strong>: ~100–120 MPa tensile. Holds <strong>10.0–13.0 kg</strong>. Heat resistance up to 190°C.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: Bambu PAHT-CF ONLY</td>
+<td><strong>Nozzle</strong>: 0.4mm/0.6mm Hardened Steel (280–300°C)<br><strong>Plate</strong>: PEI (90–100°C) + Glue<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong></td>
+</tr>
+<tr>
+<td><strong>Engineering Polyesters &amp; High-Performance Polymers</strong></td>
+<td>PET-CF / PET-GF (Carbon/Glass Fiber PET)</td>
+<td>• Bambu Lab<br>• Polymaker</td>
+<td>Low-hygroscopic structural outdoor parts, precision electrical fixtures</td>
+<td>₱2,500 – ₱3,800</td>
+<td><strong>Low Creep Composite</strong>: ~85–100 MPa tensile. Holds <strong>8.5–11.0 kg</strong>. Superior dimensional stability vs Nylon.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: Bambu PET-CF ONLY (3rd party External)</td>
+<td><strong>Nozzle</strong>: 0.4mm/0.6mm Hardened Steel (280–300°C)<br><strong>Plate</strong>: PEI (80–100°C) + Glue<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong></td>
+</tr>
+<tr>
+<td><strong>Engineering Polyesters &amp; High-Performance Polymers</strong></td>
+<td>PPA-CF / PPA-GF (Polyphthalamide High-Temp Composite)</td>
+<td>• Bambu Lab<br>• Polymaker</td>
+<td>Extreme chemical/thermal engine housings, industrial pump components</td>
+<td>₱3,800 – ₱5,500</td>
+<td><strong>Ultra Engineering Yield</strong>: ~110–130 MPa tensile. Holds <strong>11.0–14.0 kg</strong>. Continuous heat tolerance &gt;200°C.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: External Spool ONLY</td>
+<td><strong>Nozzle</strong>: 0.4mm/0.6mm Hardened Steel (290–300°C Max)<br><strong>Plate</strong>: PEI (100–110°C) + Glue<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong></td>
+</tr>
+<tr>
+<td><strong>Engineering Polyesters &amp; High-Performance Polymers</strong></td>
+<td>PPS / PPS-CF (Polyphenylene Sulfide)</td>
+<td>• Polymaker<br>• 3DXTECH</td>
+<td>Extreme chemical immersion components, semiconductor processing tools</td>
+<td>₱6,500 – ₱9,500</td>
+<td><strong>NOT TESTABLE ON X2D</strong> (Requires 320–350°C+ nozzle extrusion).</td>
+<td><strong>NOT SUPPORTED ON X2D</strong> (Exceeds 300°C nozzle limit)</td>
+<td><strong>INCOMPATIBLE WITH X2D</strong>: Requires high-temperature industrial 3D printer (320–350°C+ nozzle &amp; 90°C+ chamber).</td>
+</tr>
+<tr>
+<td><strong>Engineering Polyesters &amp; High-Performance Polymers</strong></td>
+<td>PEEK / PEKK / ULTEM (PEI)</td>
+<td>• 3DXTECH<br>• Solvay<br>• Vision Miner</td>
+<td>Aerospace structural parts, oil &amp; gas manifolds, medical implants</td>
+<td>₱18,000 – ₱35,000</td>
+<td><strong>NOT TESTABLE ON X2D</strong> (Requires 360–420°C+ nozzle extrusion).</td>
+<td><strong>NOT SUPPORTED ON X2D</strong> (Exceeds 300°C nozzle &amp; 65°C chamber limits)</td>
+<td><strong>INCOMPATIBLE WITH X2D</strong>: Requires specialized ultra-high-temp industrial hardware (400°C+ hotend, 120°C+ heated build chamber).</td>
+</tr>
+<tr>
+<td><strong>Specialty &amp; Functional Filaments</strong></td>
+<td>HIPS (High Impact Polystyrene)</td>
+<td>• eSUN<br>• Polymaker<br>• SUNLU</td>
+<td>Limonene-soluble support material for complex ABS/ASA prints</td>
+<td>₱850 – ₱1,300</td>
+<td><strong>ABS-Like Impact</strong>: ~35–45 MPa tensile. Holds <strong>2.5–3.5 kg</strong>. Used primarily as soluble support.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: Yes</td>
+<td><strong>Nozzle</strong>: 0.4mm (230–250°C)<br><strong>Plate</strong>: PEI (90–100°C)<br><strong>Chamber</strong>: <strong>Active 65°C ON</strong><br><strong>Dissolving</strong>: d-Limonene solvent bath</td>
+</tr>
+<tr>
+<td><strong>Specialty &amp; Functional Filaments</strong></td>
+<td>PVA (Polyvinyl Alcohol)</td>
+<td>• Bambu Lab<br>• eSUN<br>• Polymaker</td>
+<td>Cold/warm water-soluble supports for trapped internal PLA geometries</td>
+<td>₱1,750 – ₱2,800 (0.5 kg)</td>
+<td><strong>Non-Structural Support</strong>: Dissolves in water; not rated for load-bearing cantilever stress.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: Yes<br>AMS 2 Pro: Yes (Must dry continuously at 65°C)</td>
+<td><strong>Nozzle</strong>: 0.4mm (190–210°C)<br><strong>Plate</strong>: PEI (45–60°C)<br><strong>Drying</strong>: Extreme moisture sensitivity; active drying required</td>
+</tr>
+<tr>
+<td><strong>Specialty &amp; Functional Filaments</strong></td>
+<td>BVOH (Butenediol Vinyl Alcohol Copolymer)</td>
+<td>• Verbatim<br>• UltiMaker</td>
+<td>Fast-dissolving water-soluble support for delicate PLA/PETG/ABS overhangs</td>
+<td>₱3,200 – ₱4,800 (0.5 kg)</td>
+<td><strong>Non-Structural Support</strong>: Rapid dissolution; non-load-bearing support matrix.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: Yes<br>AMS 2 Pro: Yes (Requires sealed dry box environment)</td>
+<td><strong>Nozzle</strong>: 0.4mm (190–220°C)<br><strong>Plate</strong>: PEI (45–65°C)<br><strong>Dissolving</strong>: Dissolves 2x faster in tap water than PVA</td>
+</tr>
+<tr>
+<td><strong>Specialty &amp; Functional Filaments</strong></td>
+<td>Bambu Support for PLA / Support for PLA/PETG</td>
+<td>• Bambu Lab</td>
+<td>Zero-gap breakaway interface layers for perfectly flat horizontal overhangs</td>
+<td>₱1,050 – ₱3,700 (0.5 kg)</td>
+<td><strong>Breakaway Interface</strong>: Weak non-bonding chemical interface; zero structural capacity.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: Yes<br>AMS 2 Pro: Yes (Native RFID auto-select)</td>
+<td><strong>Nozzle</strong>: 0.4mm (190–220°C)<br><strong>Interface</strong>: Set Top Z-Distance to 0 mm<br><strong>Plate</strong>: PEI (45–75°C)</td>
+</tr>
+<tr>
+<td><strong>Specialty &amp; Functional Filaments</strong></td>
+<td>PP (Polypropylene)</td>
+<td>• FormFutura<br>• Verbatim<br>• eSUN</td>
+<td>Chemical-resistant lab equipment, living hinges, liquid containers</td>
+<td>₱1,800 – ₱3,200</td>
+<td><strong>High Fatigue &amp; Ductility</strong>: ~25–35 MPa tensile. Holds <strong>1.5–2.5 kg</strong>. Bends endlessly without fracture.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: NO (Extreme flexibility slips in AMS drive)</td>
+<td><strong>Nozzle</strong>: 0.4mm (220–250°C)<br><strong>Adhesion</strong>: <strong>MUST use PP Packing Tape or Magigoo PP on build plate</strong> (Severe warping risk)</td>
+</tr>
+<tr>
+<td><strong>Specialty &amp; Functional Filaments</strong></td>
+<td>POM / Acetal (Delrin)</td>
+<td>• Gizmo Dorks<br>• FormFutura</td>
+<td>Low-friction precision gears, sleeve bearings, sliding mechanical blocks</td>
+<td>₱2,400 – ₱3,800</td>
+<td><strong>High Slick Rigidity</strong>: ~65–75 MPa tensile. Holds <strong>4.5–6.0 kg</strong>. Exceptional self-lubricating wear surface.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: External Spool ONLY</td>
+<td><strong>WARNING</strong>: <strong>Toxic Formaldehyde Fumes</strong> if overheated &gt;230°C!<br><strong>Nozzle</strong>: 0.4mm (210–225°C strict)<br><strong>Plate</strong>: Wood/Polyolefin bed adhesive required</td>
+</tr>
+<tr>
+<td><strong>Specialty &amp; Functional Filaments</strong></td>
+<td>Metal-Filled Sintering Filaments (316L / Copper)</td>
+<td>• BASF (Ultrafuse 316L/Copper)<br>• The Virtual Foundry</td>
+<td>Debound &amp; sintered solid metal parts, heavy decorative brass/copper art</td>
+<td>₱7,500 – ₱14,000</td>
+<td><strong>Fragile Green State</strong>: Holds <strong>&lt;0.5 kg</strong> in green state (snaps easily under high mass density). Full metal strength post-sintering.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: NO (Brittle metal binder snaps inside feeders)</td>
+<td><strong>Nozzle</strong>: 0.6mm Hardened Steel<br><strong>Feed</strong>: External Spool with low-friction path<br><strong>Process</strong>: Catalytic debinding &amp; industrial kiln sintering required post-print</td>
+</tr>
+<tr>
+<td><strong>Specialty &amp; Functional Filaments</strong></td>
+<td>Conductive / ESD-Safe Filaments</td>
+<td>• Polymaker (PolyMax ESD)<br>• 3DXTECH (3DKS)<br>• eSUN</td>
+<td>Static-dissipative PCB assembly jigs, touch-screen styluses, EMI shielding</td>
+<td>₱2,200 – ₱4,500</td>
+<td><strong>Moderate Rigidity</strong>: ~40–50 MPa tensile. Holds <strong>2.5–3.8 kg</strong>. Carbon-black doping slightly lowers impact strength.</td>
+<td>Main Nozzle: Yes<br>Aux Nozzle: No<br>AMS 2 Pro: Yes (If non-abrasive matrix base)</td>
+<td><strong>Nozzle</strong>: 0.4mm Hardened Steel<br><strong>Resistivity</strong>: 10^4 to 10^9 Ohm/sq ESD safety threshold<br><strong>Plate</strong>: PEI (50–90°C base polymer dependent)</td>
+</tr>
+</tbody></table></div>
+<hr class="section-divider">
+<h1><strong>4. Pros &amp; Cons of Each Filament Type</strong></h1>
+<h2><strong>PLA (Polylactic Acid)</strong></h2>
+<ul>
+<li><strong>PLA Basic / Standard &amp; High-Speed / Rapid PLA</strong></li>
+<ul>
+<li><em>Pros</em>: Extremely easy to print; sharp dimensional accuracy; low odor; instant cooling enables ultra-fast printing up to 500 mm/s.</li>
+<li><em>Cons</em>: Low thermal deflection (&gt;55°C); brittle under sudden mechanical shock; subject to long-term creep strain.</li>
+</ul>
+<li><strong>PLA+ / Tough PLA &amp; Specialty / Aesthetic Variants (Matte, Silk, Wood, Marble)</strong></li>
+<ul>
+<li><em>Pros</em>: Superior impact strength (PLA+); gorgeous surface finishes that eliminate visible layer lines (Matte/Silk/Wood).</li>
+<li><em>Cons</em>: Silk additives weaken layer adhesion; particulate fillers (Wood/Marble/Metal) can cause nozzle clogs on 0.2mm/0.4mm nozzles.</li>
+</ul>
+<li><strong>PLA-CF / PLA-GF &amp; PLA Aero (LW-PLA)</strong></li>
+<ul>
+<li><em>Pros</em>: Exceptional rigidity and matte texture (PLA-CF); weight savings up to 50% through active gas foaming (LW-PLA).</li>
+<li><em>Cons</em>: Accelerated nozzle wear (CF); LW-PLA stringing requires intensive slicer tuning and cannot be fed through AMS units.</li>
+</ul>
+</ul>
+<h2><strong>PETG (Polyethylene Terephthalate Glycol)</strong></h2>
+<ul>
+<li><strong>PETG Basic, PETG HF &amp; Translucent</strong></li>
+<ul>
+<li><em>Pros</em>: Chemical and water resistance; robust ductility and impact dampening; translucent grades offer optical clarity.</li>
+<li><em>Cons</em>: Highly hygroscopic; susceptible to fine stringing/blobbing; aggressive adhesion can tear smooth PEI sheets without glue.</li>
+</ul>
+<li><strong>PETG-CF / PETG-GF</strong></li>
+<ul>
+<li><em>Pros</em>: Higher flexural modulus than raw PETG; hides surface layer boundaries; easy dimensional tolerance control.</li>
+<li><em>Cons</em>: Requires hardened steel hotends; slightly reduced z-layer tensile strength relative to unfilled PETG.</li>
+</ul>
+</ul>
+<h2><strong>ABS &amp; ASA</strong></h2>
+<ul>
+<li><strong>ABS Basic, ABS+ &amp; ABS-GF/CF</strong></li>
+<ul>
+<li><em>Pros</em>: Heat deflection up to 95°C; excellent impact absorption; smoothable via acetone vapor post-processing.</li>
+<li><em>Cons</em>: Pungent styrene VOC gas emissions; severe bed warping and corner lifting without active chamber heat.</li>
+</ul>
+<li><strong>ASA Standard &amp; ASA-CF / ASA-Aero</strong></li>
+<ul>
+<li><em>Pros</em>: Full UV solar radiation resistance; retains color and mechanical strength outdoors without yellowing or cracking.</li>
+<li><em>Cons</em>: High bed (100°C) and chamber (65°C) thermal demand; emits unpleasant styrene odors during printing.</li>
+</ul>
+</ul>
+<h2><strong>TPU &amp; TPE (Flexible Elastomers)</strong></h2>
+<ul>
+<li><strong>TPU for AMS (68D Semi-Rigid)</strong></li>
+<ul>
+<li><em>Pros</em>: Seamless automated multi-material printing via AMS 2 Pro; wear and tear resistance; structural semi-flexibility.</li>
+<li><em>Cons</em>: Less elastic than soft TPUs; limited energy damping compared to low-durometer grades.</li>
+</ul>
+<li><strong>Standard Flexible TPU (95A) &amp; Soft TPU/TPE (82A–90A)</strong></li>
+<ul>
+<li><em>Pros</em>: Virtually indestructible layer adhesion; extreme stretch and shock absorption; ideal for gaskets and tires.</li>
+<li><em>Cons</em>: Incompatible with internal AMS feed gears (causes severe jams); requires slow print speeds and direct external loading.</li>
+</ul>
+</ul>
+<h2><strong>PC (Polycarbonate)</strong></h2>
+<ul>
+<li><strong>Pros</strong>: Highest structural impact strength among unreinforced engineering thermoplastics; heat deflection &gt;110°C; flame-retardant options (PC-FR).</li>
+<li><strong>Cons</strong>: Intense thermal stress and warping; requires high bed (100–120°C) and active chamber heating; rapid moisture uptake causing steam voiding.</li>
+</ul>
+<h2><strong>PA / Nylon Composites (PA6, PA12, PAHT, PET-CF, PPA-CF)</strong></h2>
+<ul>
+<li><strong>Pros</strong>: Industry-leading mechanical stiffness and tensile yield strength (&gt;110 MPa); operating heat tolerance up to 190°C; outstanding fuel/chemical resistance.</li>
+<li><strong>Cons</strong>: High cost; extreme hygroscopicity (requires active continuous drying); abrasive carbon/glass fiber content rapidly degrades standard brass/stainless steel nozzles.</li>
+</ul>
+<h2><strong>High-Performance Polymers (PPS, PEEK, PEKK, ULTEM)</strong></h2>
+<ul>
+<li><strong>Pros</strong>: Aerospace-grade chemical, flame, and continuous thermal resistance (200°C–300°C+); replaces machined metal components.</li>
+<li><strong>Cons</strong>: <strong>Completely incompatible with Bambu Lab X2D</strong>; requires industrial 3D printers with hotends exceeding 350°C–420°C and build chambers over 120°C.</li>
+</ul>
+<h2><strong>Soluble &amp; Dedicated Support Filaments (HIPS, PVA, BVOH, Bambu Support)</strong></h2>
+<ul>
+<li><strong>Pros</strong>: Enables complex trapped geometries and zero-clearance overhang interfaces; leaves smooth horizontal overhang surfaces with zero mechanical scarring.</li>
+<li><strong>Cons</strong>: PVA/BVOH dissolve prematurely if exposed to humid air; HIPS requires hazardous d-Limonene solvent handling; elevated cost per spool.</li>
+</ul>
+<h2><strong>Specialty Technical Filaments (PP, POM, Metal-Filled, Conductive/ESD)</strong></h2>
+<ul>
+<li><strong>Pros</strong>: Delivers unique functional behaviors (living hinges with PP, ultra-low friction slickness with POM, post-sintered real metal parts with 316L, static dissipation for electronics with ESD).</li>
+<li><strong>Cons</strong>: PP and POM exhibit severe bed detachment warping; POM emits toxic formaldehyde fumes if overheated; metal green parts break easily before kiln sintering; ESD/conductive additives reduce structural impact resistance.</li>
+</ul>
+<h2><strong>PLA (Polylactic Acid)</strong></h2>
+<ul>
+<li><strong>PLA Basic / PLA+</strong></li>
+<ul>
+<li><em>Pros</em>: Easy to print; high dimensional accuracy; virtually no warping; low odor; wide color selection.</li>
+<li><em>Cons</em>: Low heat resistance (softens at 55°C); brittle under sudden shock; prone to long-term creep load deformation.</li>
+</ul>
+<li><strong>PLA Matte / Silk / Specialty (Wood, Marble, Galaxy)</strong></li>
+<ul>
+<li><em>Pros</em>: Premium surface finishes; hides layer lines; visually appealing for display pieces.</li>
+<li><em>Cons</em>: Reduced layer-to-layer strength; specialty fillers (Wood/Marble) can clog 0.2mm or 0.4mm standard nozzles.</li>
+</ul>
+<li><strong>PLA-CF (Carbon Fiber)</strong></li>
+<ul>
+<li><em>Pros</em>: Matte finish; exceptional flexural rigidity; minimal thermal expansion during printing.</li>
+<li><em>Cons</em>: Increased nozzle wear; higher cost; brittle upon severe impact.</li>
+</ul>
+<li><strong>PLA Aero (Lightweight Foaming)</strong></li>
+<ul>
+<li><em>Pros</em>: Expands up to 200–300% during extrusion; saves up to 50% total print weight.</li>
+<li><em>Cons</em>: Low structural strength; stringing requires post-processing tuning; incompatible with automated switching systems.</li>
+</ul>
+</ul>
+<h2><strong>PETG (Polyethylene Terephthalate Glycol)</strong></h2>
+<ul>
+<li><strong>PETG Basic / High Flow (HF)</strong></li>
+<ul>
+<li><em>Pros</em>: Excellent moisture and chemical resistance; durable impact resistance; good layer adhesion; minimal warping.</li>
+<li><em>Cons</em>: Highly hygroscopic (requires drying); prone to fine stringing/blobbing; can fuse permanently to smooth PEI plates without a release agent.</li>
+</ul>
+<li><strong>PETG-CF</strong></li>
+<ul>
+<li><em>Pros</em>: Higher stiffness than standard PETG; clean matte surface finish; easy to control dimensional tolerances.</li>
+<li><em>Cons</em>: Requires hardened steel nozzles; slightly reduced z-layer strength compared to raw PETG.</li>
+</ul>
+</ul>
+<h2><strong>ABS &amp; ASA</strong></h2>
+<ul>
+<li><strong>ABS / ABS-GF</strong></li>
+<ul>
+<li><em>Pros</em>: High thermal capacity (~95°C); easy to post-process with acetone vapor smoothing; light overall density.</li>
+<li><em>Cons</em>: Strong styrene odor and VOC emissions; prone to warping/delamination without active chamber heating.</li>
+</ul>
+<li><strong>ASA / ASA-CF</strong></li>
+<ul>
+<li><em>Pros</em>: All benefits of ABS with added UV weather resistance; ideal for outdoor components.</li>
+<li><em>Cons</em>: Requires high bed and chamber temperatures; generates VOC emissions during extrusion.</li>
+</ul>
+</ul>
+<h2><strong>TPU (Thermoplastic Polyurethane)</strong></h2>
+<ul>
+<li><strong>TPU for AMS (68D)</strong></li>
+<ul>
+<li><em>Pros</em>: Fully compatible with multi-color AMS 2 Pro printing; high abrasion resistance; semi-rigid structural flexibility.</li>
+<li><em>Cons</em>: Less elastic than lower-durometer TPUs; higher cost per spool.</li>
+</ul>
+<li><strong>Standard Soft TPU (85A–95A)</strong></li>
+<ul>
+<li><em>Pros</em>: Excellent energy absorption, flexibility, and layer adhesion; highly resistant to fatigue cracking.</li>
+<li><em>Cons</em>: Cannot run through AMS unit; slow print speeds required; high moisture absorption rate.</li>
+</ul>
+</ul>
+<h2><strong>PC (Polycarbonate)</strong></h2>
+<ul>
+<li><strong>Pros</strong>: Exceptional mechanical tensile strength; high impact resistance; clarity in translucent grades; heat deflection &gt;110°C.</li>
+<li><strong>Cons</strong>: Prone to internal stresses and warping; requires high bed (100–120°C) and active chamber temperatures; strict pre-print drying required.</li>
+</ul>
+<h2><strong>PA / Nylon Composites (PA6-CF, PAHT-CF, PET-CF, PPA-CF)</strong></h2>
+<ul>
+<li><strong>Pros</strong>: Extreme mechanical stiffness and tensile yield strength; high continuous operating temperatures (150–190°C); chemical and fuel resistance.</li>
+<li><strong>Cons</strong>: High material cost; highly hygroscopic (absorbs ambient humidity within hours); requires hardened steel tooling; <em>PPS-CF is incompatible with the X2D platform</em>.</li>
+</ul>
+<hr class="section-divider">
+<h1><strong>5. Filament Brands in the Philippine Market</strong></h1>
+<p>Navigating local availability on platforms like <strong>Shopee</strong>, <strong>Lazada</strong>, <strong>Makerlab Electronics</strong>, and <strong>3DPH</strong> helps ensure material consistency and reliability.</p>
+<div class="table-toolbar">
+<span class="table-badge">Table 2 &middot; 4 rows</span>
+<input type="text" class="table-search" placeholder="Filter rows in this table..." oninput="filterTable('tab1_tbl_2', this.value)">
+</div>
+<div class="table-container"><table id="tab1_tbl_2" class="data-table"><thead><tr>
+<th>Brand</th>
+<th>Local PH Price Range</th>
+<th>Spool Material</th>
+<th>AMS Compatibility</th>
+<th>Print Reliability</th>
+<th>Local Availability &amp; Specialty</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Bambu Lab</strong></td>
+<td>₱1,050 – ₱4,500</td>
+<td>High-Temp Reusable Plastic</td>
+<td>100% Native (RFID Chip auto-configures settings)</td>
+<td>Highest (Optimized profiles pre-loaded in Bambu Studio)</td>
+<td>Available via official stores &amp; local importers. Best for plug-and-play multi-color and automated dry tracking.</td>
+</tr>
+<tr>
+<td><strong>eSUN</strong></td>
+<td>₱650 – ₱2,400</td>
+<td>Transitioning Cardboard to Plastic</td>
+<td>Good (Cardboard edges require plastic rim adapters)</td>
+<td>High (Consistent tolerances)</td>
+<td>Widely available across PH sellers. <strong>PLA+</strong> and <strong>eTPU-95A</strong> are industry standards for value and performance.</td>
+</tr>
+<tr>
+<td><strong>SUNLU</strong></td>
+<td>₱600 – ₱1,400</td>
+<td>Hard Plastic &amp; Cardboard</td>
+<td>High (Fits standard spool dimensions)</td>
+<td>Moderate to High</td>
+<td>Excellent budget option on Shopee/Lazada. Known for reliable <strong>PLA Meta</strong>, <strong>PETG</strong>, and budget filament dryers.</td>
+</tr>
+<tr>
+<td><strong>Polymaker</strong></td>
+<td>₱1,200 – ₱4,500</td>
+<td>Heavy Duty Cardboard</td>
+<td>Moderate (Cardboard spools require adapter rims or rewinding)</td>
+<td>Exceptional (Professional grade)</td>
+<td>Available via specialized 3D printer supply houses. Market leader in engineering composites (<strong>Fiberon PA6-CF</strong>, <strong>PolyMax PC</strong>).</td>
+</tr>
+</tbody></table></div>
+<h2><strong>Cardboard Spool Workaround for AMS 2 Pro</strong></h2>
+<p>Cardboard spools (common with Polymaker, eSUN, and Elegoo) can shed paper dust into the feeder gears or slip along the rubber rollers inside the AMS 2 Pro, causing retraction failures.</p>
+<ul>
+<li><strong>Solution 1 (Recommended)</strong>: Print snap-on <strong>Spool Adapter Rims</strong> (available on MakerWorld) in PLA or PETG to cover the outer cardboard edge.</li>
+<li><strong>Solution 2</strong>: Transfer the filament onto a <strong>Bambu Reusable Plastic Spool</strong> by unscrewing the core or using a manual spool winder.</li>
+</ul>
+<hr class="section-divider">
+<h1><strong>6. Summary Recommendations: Best Filament &amp; Brand by Application</strong></h1>
+<ul>
+<li><strong>Complete Beginner &amp; Everyday Prototypes</strong></li>
+<ul>
+<li><em>Material</em>: <strong>PLA Basic</strong> or <strong>PLA+</strong></li>
+<li><em>Top Pick</em>: <strong>eSUN PLA+</strong> (Best budget reliability) or <strong>Bambu Lab PLA Basic</strong> (Automatic RFID setup).</li>
+</ul>
+<li><strong>Aesthetic Displays, Figurines &amp; Cosplay Props</strong></li>
+<ul>
+<li><em>Material</em>: <strong>PLA Matte</strong> or <strong>PLA Silk</strong></li>
+<li><em>Top Pick</em>: <strong>Bambu Lab PLA Matte</strong> or <strong>Polymaker PolyTerra PLA</strong>.</li>
+</ul>
+<li><strong>Outdoor, Sun-Exposed &amp; Marine Parts</strong></li>
+<ul>
+<li><em>Material</em>: <strong>ASA</strong></li>
+<li><em>Top Pick</em>: <strong>Bambu Lab ASA</strong> or <strong>Polymaker PolyLite ASA</strong> (Fitted on X2D with Active Chamber Heating at 65°C).</li>
+</ul>
+<li><strong>Strong, Impact-Resistant Mechanical Parts</strong></li>
+<ul>
+<li><em>Material</em>: <strong>PETG</strong> or <strong>ABS</strong></li>
+<li><em>Top Pick</em>: <strong>eSUN PETG</strong> (Durable &amp; low cost) or <strong>Bambu Lab ABS</strong> (Heated chamber prevents warping).</li>
+</ul>
+<li><strong>Extreme Heat &amp; Heavy Load Engineering Parts</strong></li>
+<ul>
+<li><em>Material</em>: <strong>PA6-CF</strong>, <strong>PAHT-CF</strong>, or <strong>PC</strong></li>
+<li><em>Top Pick</em>: <strong>Bambu Lab PAHT-CF</strong> (AMS compatible) or <strong>Polymaker Fiberon PA6-CF</strong> (Fed via external spool).</li>
+</ul>
+<li><strong>Flexible, Functional Shock-Absorbing Parts</strong></li>
+<ul>
+<li><em>Material (AMS Multi-Color)</em>: <strong>Bambu Lab TPU for AMS (68D)</strong>.</li>
+<li><em>Material (High Elasticity)</em>: <strong>eSUN eTPU-95A</strong> (Fed via External Rear Spool ONLY).</li>
+</ul>
+<li><strong>Complex Geometries &amp; Flush Surface Overhangs</strong></li>
+<ul>
+<li><em>Material</em>: <strong>Bambu Support for PLA</strong> (for pure interface peeling) or <strong>PETG</strong> used as an interface material on PLA prints.</li>
+</ul>
+</ul>
+  </section>
+
+  <section id="tab2" class="tab-panel" role="tabpanel">
+    <h1><strong>Polymaker Filament &amp; Project Playbook</strong></h1>
+<h1><strong>Bambu Lab X2D Combo + AMS 2 Pro Optimization Guide</strong></h1>
+<p>This guide provides strategic sourcing recommendations for Polymaker&#x27;s official Pinduoduo flagship store, hardware integration protocols for the Bambu Lab X2D Combo + AMS 2 Pro, itemized project execution workflows, and a skill progression roadmap for additive manufacturing workflows.</p>
+<hr class="section-divider">
+<h1><strong>1. Pinduoduo Polymaker Flagship Store Buying Guide</strong></h1>
+<p>Polymaker uses distinct product line naming on mainland Chinese e-commerce platforms. Selecting the correct sub-brand ensures optimal aesthetic and mechanical performance for specific applications.</p>
+<h2><strong>Product Line Breakdown</strong></h2>
+<h3><strong>PLA Product Lines</strong></h3>
+<ul>
+<li><strong>Panchroma™ Matte (formerly PolyTerra PLA)</strong>: Formulated with organic micro-fillers to minimize surface light reflection, hiding layer lines effectively. Excellent for home decor, architectural models, display figurines, and souvenirs. Low impact resistance; not suitable for functional load-bearing joints.</li>
+<li><strong>Panchroma™ Specialty (Basic / Satin / Silk / Dual-Color / Gradient / Marble)</strong>: Formulated for high visual impact, luster, and color transition effects. Ideal for aesthetic gifts, multi-color keychains, and display items. Silk variants exhibit lower inter-layer adhesion; design parts with thicker walls.</li>
+<li><strong>PolyLite™ PLA Pro &amp; PolyMax™ PLA</strong>: High-impact, drop-resistant PLA formulations modified with impact modifiers. PolyLite PLA Pro delivers high rigidity with enhanced impact strength. PolyMax PLA offers fracture toughness approaching ABS while maintaining PLA print ease. Essential for functional brackets, mechanical tools, and high-stress toys.</li>
+</ul>
+<h3><strong>PETG Product Lines</strong></h3>
+<ul>
+<li><strong>PolyLite™ PETG / PolyMax™ PETG</strong>: Glycol-modified polyethylene terephthalate offering thermal stability up to ~75–80°C, chemical resistance, low moisture absorption, and high impact resistance. Ideal for kitchenware, bathroom fixtures, refrigerator organizers, and shaded automotive cabin components.</li>
+</ul>
+<h3><strong>TPU Product Lines</strong></h3>
+<ul>
+<li><strong>PolyFlex™ TPU95 / PolyFlex™ TPU95-HF</strong>: Thermoplastic polyurethane with Shore 95A hardness (TPU95-HF offers higher melt flow for high-speed extrusion with an effective hardness near 98A). Exceptional tear strength, wear resistance, and elastic recovery. Best for shock-absorbing phone bumpers, non-slip feet, keyfobs, and flexible seals.</li>
+</ul>
+<hr class="section-divider">
+<h2><strong>Critical Hardware Integration Protocols (X2D + AMS 2 Pro)</strong></h2>
+<h3><strong>Cardboard Spool Rim Adapters</strong></h3>
+<p>Polymaker uses 100% recycled cardboard spools. To prevent cardboard edge degradation and paper dust accumulation inside the AMS 2 Pro feed rollers (which causes slipping and false filament-out errors):</p>
+<ul>
+<li>Print reusable plastic spool rim adapters in PETG or PLA before loading spools into the AMS 2 Pro.</li>
+<li>Alternatively, respool the material onto Bambu Reusable Spools. Ensure the cardboard rim is fully enclosed and flush before closing the AMS lid.</li>
+</ul>
+<h3><strong>TPU Feed Path Routing Rules</strong></h3>
+<p><strong>Never load PolyFlex TPU95 or TPU95-HF into the AMS 2 Pro.</strong></p>
+<p>Flexible filaments buckle within the internal PTFE guide tubes and automatic multiplexer of the AMS unit, causing severe feed jams.</p>
+<ul>
+<li><strong>Mounting</strong>: Install Polymaker TPU on the <strong>rear External Spool Holder</strong>.</li>
+<li><strong>Routing</strong>: Feed directly into the main direct-drive extruder of the X2D. bypass the AMS feed lines entirely.</li>
+<li><strong>Nozzle Selection</strong>: Do not route TPU through auxiliary multi-nozzle switching assemblies if installed; run a direct path to the main hotend.</li>
+</ul>
+<hr class="section-divider">
+<h1><strong>2. Project-by-Project Recommendations &amp; Technical Specs</strong></h1>
+<div class="table-toolbar">
+<span class="table-badge">Table 1 &middot; 8 rows</span>
+<input type="text" class="table-search" placeholder="Filter rows in this table..." oninput="filterTable('tab2_tbl_1', this.value)">
+</div>
+<div class="table-container"><table id="tab2_tbl_1" class="data-table"><thead><tr>
+<th>Category</th>
+<th>Recommended Filament</th>
+<th>Core Advantage</th>
+<th>Slicing &amp; Hardware Setup</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>A. Phone Case</strong></td>
+<td><strong>Body: PolyFlex TPU95</strong><br><strong>Grip: PolyLite PETG</strong></td>
+<td>Flexible drop protection combined with rigid structural snap-fit</td>
+<td>External spool for TPU (0.4mm nozzle, 30–50 mm/s); AMS for PETG ring.</td>
+</tr>
+<tr>
+<td><strong>B. Home Displays</strong></td>
+<td>Panchroma™ Matte / Silk / Marble PLA</td>
+<td>Conceals layer lines; matte surface gives a ceramic-like finish</td>
+<td>Enable Fuzzy Skin (0.1mm distance); use 0.6mm nozzle for Spiral Vase mode.</td>
+</tr>
+<tr>
+<td><strong>C. Toys &amp; Fidgets</strong></td>
+<td>PolyLite™ PLA Pro + PolyFlex TPU95</td>
+<td>Drop resistance on hinge pins; soft components for wheels</td>
+<td>Maintain 0.25mm clearance on print-in-place joints; avoid Silk PLA on pins.</td>
+</tr>
+<tr>
+<td><strong>D. Souvenirs</strong></td>
+<td>Panchroma™ Matte / Satin PLA</td>
+<td>Sharp multi-color detail; zero-gap support interfaces</td>
+<td>AMS multi-color face-down print on Textured PEI; use PETG support interface.</td>
+</tr>
+<tr>
+<td><strong>E. Keychains</strong></td>
+<td>PolyLite™ PETG or PolyFlex™ TPU95</td>
+<td>Thermal stability in hot bags; indestructible flexible tags</td>
+<td>Embed NFC tags/magnets via Pause at Layer (M600); 100% wall loops on loops.</td>
+</tr>
+<tr>
+<td><strong>F. Appliance Tools</strong></td>
+<td>PolyLite™ PETG + PolyFlex™ TPU95</td>
+<td>Water/chemical resistance; non-slip overmolding</td>
+<td>Embed neodymium magnets inside PETG; use TPU for non-marking feet.</td>
+</tr>
+<tr>
+<td><strong>G. Car Parts</strong></td>
+<td><strong>Cabin: PolyLite™ PETG</strong><br><strong>Coasters: PolyFlex™ TPU</strong></td>
+<td>Resists cabin ambient heat up to 75°C without warping</td>
+<td><strong>NEVER use PLA in cars.</strong> Future exterior/dash upgrades require PolyLite ASA.</td>
+</tr>
+<tr>
+<td><strong>H. Engineering Aids</strong></td>
+<td>PolyLite™ PETG + PolyFlex™ TPU95</td>
+<td>Precise dimensional tolerances; oil/impact resistance</td>
+<td>Print Gridfinity baseplates; use TPU for instrument protection boots.</td>
+</tr>
+</tbody></table></div>
+<hr class="section-divider">
+<h2><strong>Detailed Category Execution Workflows</strong></h2>
+<h3><strong>A. Customized iPhone Casing with Integrated Finger Holder</strong></h3>
+<ul>
+<li><strong>Material Selection</strong>: PolyFlex TPU95 (Main Bumper Shell) + PolyLite PETG or PLA Pro (Rigid Finger Ring / MagSafe Insert).</li>
+<li><strong>Engineering Rationale</strong>: TPU provides impact damping and flexural fatigue resistance for daily installation. PETG provides the structural rigidity necessary for a snap-in or sliding finger loop mechanism without shearing under tensile loads.</li>
+<li><strong>X2D Slicing &amp; Hardware Configuration</strong>:</li>
+<ul>
+<li>Print the main TPU shell from the <strong>External Spool Holder</strong>. Set print speed to 30–50 mm/s, max volumetric speed to 3.5 mm³/s, retraction length to 1.0–1.5 mm, and extruder temperature to 225–235°C. Apply thin liquid glue or glue stick to the Textured PEI plate as a release agent to prevent permanent bonding.</li>
+<li>Print the rigid finger ring component via the <strong>AMS 2 Pro</strong> using PolyLite PETG (240°C, 80°C bed).</li>
+<li>Design interface tolerances with a <strong>0.15mm clearance gap</strong> for press-fit mechanical retention.</li>
+</ul>
+</ul>
+<h3><strong>B. Home Displays (Vases, Sculptures, Wall Art, Planters)</strong></h3>
+<ul>
+<li><strong>Material Selection</strong>: Panchroma™ Matte PLA (Planters, Sculptures) or Panchroma™ Dual-Color / Silk PLA (Vases, Geometric Decor).</li>
+<li><strong>Engineering Rationale</strong>: Panchroma Matte diffuses specular highlights, hiding layer lines and giving structural prints a ceramic or stone aesthetic.</li>
+<li><strong>X2D Slicing &amp; Hardware Configuration</strong>:</li>
+<ul>
+<li><strong>Planters/Sculptures</strong>: Enable <strong>Fuzzy Skin</strong> in Bambu Studio (Fuzzy Skin Thickness: 0.2mm, Fuzzy Skin Point Distance: 0.15mm) to create a micro-textured granite finish.</li>
+<li><strong>Vases</strong>: Use <strong>Spiral Outer Contour Mode (Vase Mode)</strong> paired with a 0.6mm nozzle. Increase line width to 0.8mm and layer height to 0.3mm to achieve watertight, single-wall structural integrity.</li>
+</ul>
+</ul>
+<h3><strong>C. Toys, Articulated Figures &amp; Fidget Playsets</strong></h3>
+<ul>
+<li><strong>Material Selection</strong>: PolyLite™ PLA Pro or PolyMax™ PLA (Mechanical Frame &amp; Joints) + PolyFlex TPU95 (Tires, Bumpers, Soft Parts).</li>
+<li><strong>Engineering Rationale</strong>: Standard PLA and Silk PLA exhibit low izod impact strength and shear along layer lines, causing small linkage pins to snap. PLA Pro incorporates impact modifiers that yield higher energy absorption before brittle failure.</li>
+<li><strong>X2D Slicing &amp; Hardware Configuration</strong>:</li>
+<ul>
+<li>Set <strong>Print-in-Place joint clearances to 0.20mm–0.25mm</strong>.</li>
+<li>Configure wall loops to a minimum of <strong>4 perimeters</strong> rather than increasing infill density; perimeter count directly governs pin shear strength. Set infill to <em>Gyroid</em> at 20% density.</li>
+</ul>
+</ul>
+<h3><strong>D. Souvenirs, Event Keepsakes &amp; Custom Nameplates</strong></h3>
+<ul>
+<li><strong>Material Selection</strong>: Panchroma™ Matte / Satin / Dual-Color PLA (Base Body) + PolyLite™ PETG (Support Interface Material).</li>
+<li><strong>Engineering Rationale</strong>: Multi-color text printed face-down on a Textured PEI plate produces an injection-molded, flush surface finish. Using PETG as a zero-gap support interface on PLA models allows clean support removal on overhangs.</li>
+<li><strong>X2D Slicing &amp; Hardware Configuration</strong>:</li>
+<ul>
+<li><strong>Face-Down Typography</strong>: Lay the top visual surface directly on the build plate. Ensure the first layer speed is capped at 25 mm/s with a 0.2mm layer height for crisp lettering without color bleeding.</li>
+<li><strong>Zero-Gap Support System</strong>: Set Support Top Z Distance to <strong>0.0mm</strong> and select PETG as the Support Interface Filament in the AMS 2 Pro settings. The chemical incompatibility between PLA and PETG allows the support interface to release cleanly, leaving a smooth surface underneath.</li>
+</ul>
+</ul>
+<pre class="ascii-diagram">       [ Zero-Gap Breakaway Support Configuration ]
+
+       +---------------------------------------+  &lt;- Model Body (PLA)
+       |                                       |
+       +=======================================+  &lt;- 0.0mm Interface Layer (PETG)
+       |:::::::::::::::::::::::::::::::::::::::|  &lt;- Support Structure (PLA)
+       +---------------------------------------+</pre>
+<h3><strong>E. Functional Keychains &amp; Wearable Hardware</strong></h3>
+<ul>
+<li><strong>Material Selection</strong>: PolyLite™ PETG (Rigid Utility Keychains) or PolyFlex™ TPU95 (Flexible Bag Tags &amp; Fob Protectors).</li>
+<li><strong>Engineering Rationale</strong>: Keychains placed in pockets, bags, or parked vehicles experience physical wear and elevated temperatures. PolyLite PETG resists heat deformation up to ~75°C, while TPU creates an flexible tag that will not scratch vehicle paint or device displays.</li>
+<li><strong>X2D Slicing &amp; Hardware Configuration</strong>:</li>
+<ul>
+<li><strong>Hardware Integration (NFC / Magnets)</strong>: Insert a Pause at Layer command (M600) in Bambu Studio right before the top ceiling of an internal cavity closes. Drop in an NTAG215 adhesive coin or a neodymium magnet, then resume printing to fully encapsulate the component.</li>
+<li>Set outer wall count to <strong>100% (Solid)</strong> around key-ring eyelets to prevent splitting under tension.</li>
+</ul>
+</ul>
+<h3><strong>F. Household Tools for Kitchen, Refrigerators &amp; Appliances</strong></h3>
+<ul>
+<li><strong>Material Selection</strong>: PolyLite™ PETG (Structural Racks, Strainers) + PolyFlex™ TPU95 (Non-Slip Gaskets, Door Bumpers).</li>
+<li><strong>Engineering Rationale</strong>: PETG features low water absorption, high chemical resistance, and dishwasher compatibility (top rack, &lt;70°C). TPU provides non-slip, non-marking contact pads for glass and stainless steel appliances.</li>
+<li><strong>X2D Slicing &amp; Hardware Configuration</strong>:</li>
+<ul>
+<li><strong>Embedded Magnet Storage</strong>: Model internal pockets for 10×2 mm N52 neodymium magnets. Pause the print prior to ceiling closure for permanent concealment.</li>
+<li><em>Food Contact &amp; Sanitation Protocol</em>: FDM layer lines can harbor bacteria. Limit printed food-adjacent components to dry-goods storage, bottle dividers, exterior appliance handles, and hand-washed items. Seal functional wet items with a food-safe epoxy coating.</li>
+</ul>
+</ul>
+<h3><strong>G. Car Cabin Accessories (Thermal Boundary Guidelines)</strong></h3>
+<ul>
+<li><strong>Thermal Boundary Notice</strong>: Parked vehicles in tropical climates reach interior ambient temperatures between <strong>60°C and 75°C</strong>, with direct dashboard surface temperatures exceeding <strong>90°C</strong>. <strong>Do not use PLA for automotive applications</strong>, as its glass transition temperature (T_g ≈ 55–60°C) results in rapid thermal sagging.</li>
+<li><strong>Current Order Utilization</strong>:</li>
+<ul>
+<li><strong>PolyLite™ PETG (T_g ≈ 75–80°C)</strong>: Suitable <em>only</em> for shaded, low-stress cabin areas (under-seat organizers, trunk dividers, low-mounted console insert trays, and seat-gap fillers). Keep out of direct sun contact through windshields or windows.</li>
+<li><strong>PolyFlex™ TPU95 (T_g &gt; 100°C equivalent stability)</strong>: Highly effective for non-slip cupholder coasters, keyfob covers, seatbelt buckle silencers, and anti-rattle inserts. TPU handles high cabin temperatures without softening.</li>
+</ul>
+<li><strong>Future Upgrade Recommendation</strong>: For dashboard phone mounts, sun-visor clips, or exterior trim, use <strong>Polymaker PolyLite™ ASA</strong>. ASA provides heat resistance up to 100°C and high UV stability. The X2D&#x27;s 65°C actively heated chamber reliably manages ASA shrinkage and warping.</li>
+</ul>
+<pre class="ascii-diagram">       [ Interior Vehicle Temperature &amp; Filament Suitability ]
+
+       Temp (°C)
+        100°C ------------------------------------------- [ ASA Recommended ]
+              | Direct Sunlight / Dash Surfaces (85-95°C)
+         80°C ------------------------------------------- [ PETG Limit ]
+              | Shaded Cabin / Center Console (65-75°C)
+         60°C ------------------------------------------- [ PLA Deflects ]
+              | Ambient Cabin Air (50-60°C)
+         40°C -------------------------------------------</pre>
+<h3><strong>H. Engineering Aids, Office Tools &amp; Mechanical Fixtures</strong></h3>
+<ul>
+<li><strong>Material Selection</strong>: PolyLite™ PETG (Rigid Jigs, Measuring Tool Organizers) + PolyFlex™ TPU95 (Instrument Protective Boots, Wrist Rests).</li>
+<li><strong>Engineering Rationale</strong>: PETG delivers consistent dimensional accuracy and creep resistance under sustained mechanical loads.</li>
+<li><strong>X2D Slicing &amp; Hardware Configuration</strong>:</li>
+<ul>
+<li><strong>Gridfinity Workbench System</strong>: Standardize drawer storage by modeling custom Gridfinity-compliant modules (42 mm grid bases) tailored for Mitutoyo calipers, micrometer stands, drill bit sets, and SD card arrays.</li>
+<li><strong>Technical Visual Aids</strong>: Print scaled sectional cutaways of industrial hardware (valves, pump impellers, heat exchanger cores) using multi-color AMS layer mapping to highlight internal fluid paths and dynamic assemblies.</li>
+</ul>
+</ul>
+<hr class="section-divider">
+<h1><strong>3. Skill-Building Roadmap</strong></h1>
+<p>To build proficiency with the Bambu Lab X2D Combo + AMS 2 Pro and parameter management before offering custom prints commercialization, follow this sequential 4-step progression plan.</p>
+<pre class="ascii-diagram">+-------------------------------------------------------------------+
+| STEP 1: Calibration, Tolerances &amp; Hardware Spool Prep            |
+| - Print AMS 2 Pro cardboard spool rim adapters in PETG.           |
+| - Run flow rate, pressure advance, and clearance test gauges.     |
++-------------------------------------------------------------------+
+                                  │
+                                  ▼
++-------------------------------------------------------------------+
+| STEP 2: Multi-Material AMS 2 Pro &amp; Support Interface Mastery      |
+| - Execute face-down multi-color text prints on Textured PEI.      |
+| - Tune PETG-on-PLA zero Z-distance breakaway support interfaces.  |
++-------------------------------------------------------------------+
+                                  │
+                                  ▼
++-------------------------------------------------------------------+
+| STEP 3: External Spool TPU Integration &amp; Surface Tuning           |
+| - Route PolyFlex TPU95 from external spool to direct extruder.    |
+| - Tune retractions, seam alignment, and top-surface ironing.      |
++-------------------------------------------------------------------+
+                                  │
+                                  ▼
++-------------------------------------------------------------------+
+| STEP 4: Parametric CAD Modeling &amp; Hardware Encapsulation          |
+| - Design parametric Gridfinity organizers in CAD software.        |
+| - Master M600 layer pause scripts for embedding magnets &amp; NFCs.   |
++-------------------------------------------------------------------+</pre>
+<h2><strong>Step 1: Calibration, Tolerances &amp; Hardware Spool Preparation</strong></h2>
+<ol>
+<li><strong>Spool Adaptations</strong>: Print a set of snap-on rim adapters for Polymaker cardboard spools using PolyLite PETG. Confirm smooth rotation inside the AMS 2 Pro roller bays without clearance binding.</li>
+<li><strong>Tolerance Gauge</strong>: Print a standardized tolerance test block (0.50 mm down to 0.05 mm clearance pins) using Panchroma Matte PLA and PolyLite PETG to establish baseline offset compensation values (X-Y Hole Compensation / X-Y Contour Compensation) in Bambu Studio.</li>
+</ol>
+<h2><strong>Step 2: Multi-Material AMS 2 Pro &amp; Support Interface Mastery</strong></h2>
+<ol>
+<li><strong>Face-Down Typography</strong>: Model a two-color souvenir keyplate. Optimize print settings for a flawless bottom-layer finish using the Textured PEI plate (0.2mm initial layer height, 25 mm/s initial layer speed).</li>
+<li><strong>Breakaway Interface Testing</strong>: Print an complex overhang model in Panchroma PLA using PolyLite PETG as the Support Interface Filament. Set Support Top Z Distance to 0.0mm. Confirm clean, zero-gap support separation and a smooth contact surface.</li>
+</ol>
+<h2><strong>Step 3: External Spool TPU Integration &amp; Surface Tuning</strong></h2>
+<ol>
+<li><strong>Direct Routing Setup</strong>: Mount PolyFlex TPU95 to the rear external spool holder and route it straight into the primary direct-drive extruder.</li>
+<li><strong>Bumper Print Execution</strong>: Slice and print a dual-material phone case (TPU body via external feed; rigid accent insert in PETG via AMS 2 Pro). Fine-tune stringing parameters, max volumetric flow (3.5 mm³/s), seam positioning, and top-surface ironing settings.</li>
+</ol>
+<h2><strong>Step 4: Parametric CAD Modeling &amp; Embedded Hardware Encapsulation</strong></h2>
+<ol>
+<li><strong>Parametric Modeling</strong>: Use CAD software (Fusion 360, Onshape, or SolidWorks) to build a parametric Gridfinity organizer tray designed specifically for an engineering measuring tool.</li>
+<li><strong>Component Encapsulation</strong>: Add internal cavities within the model walls for neodymium magnets and an NTAG215 NFC sticker. Insert an M600 pause command at the target layer height, place the hardware mid-print, and resume extrusion to create a fully sealed functional part.</li>
+</ol>
+  </section>
+
+  <section id="tab3" class="tab-panel" role="tabpanel">
+    <h1><strong>Bambu Studio Master Manual &amp; Technical Reference</strong></h1>
+<h1><strong>Tailored for the Bambu Lab X2D Combo &amp; AMS 2 Pro System</strong></h1>
+<hr class="section-divider">
+<h1><strong>SECTION 1: Bambu Studio End-to-End Workflow &amp; X2D Dual-Nozzle Architecture</strong></h1>
+<h2><strong>1. Initial Setup &amp; Network Connection</strong></h2>
+<h3><strong>Printer Preset Selection</strong></h3>
+<p>Upon launching Bambu Studio, configure your active printer hardware profile. For standard operations using 0.4 mm nozzles, select <strong>Bambu Lab X2D 0.4 nozzle</strong>. When processing abrasive polymers, heavy carbon-fiber composites, soft elastomers, or high-volumetric flow models, switch to <strong>Bambu Lab X2D 0.6 nozzle</strong>.</p>
+<ul>
+<li><strong>0.4 mm Nozzle Profile</strong>: Standard baseline. Optimized for resolution down to 0.08 mm layer height and thin wall feature accuracy.</li>
+<li><strong>0.6 mm Nozzle Profile</strong>: Increases minimum line width to ~0.62 mm. Essential for preventing nozzle clogging when printing materials containing chopped carbon fiber (PA6-CF, PETG-CF), glass fiber, or wood fill, and for preventing buckling in flexible TPU filaments by reducing backpressure.</li>
+</ul>
+<h3><strong>Build Plate Profile Selection</strong></h3>
+<p>The build plate selection in Bambu Studio directly modifies nozzle temperature profiles, bed temperature profiles, and hardware-level Z-offset squish parameters. Selecting the wrong profile will lead to bed adhesion failure or permanent build plate damage.</p>
+<ul>
+<li><strong>Textured PEI Plate</strong>: Uses a higher bed temperature (e.g., 55–60°C for PLA, 70–80°C for PETG) and applies an additional -0.04 mm Z-offset squish to force molten plastic into the textured valleys. Requires no liquid adhesive for PLA/PETG.</li>
+<li><strong>Smooth PEI Plate</strong>: Provides a completely flat bottom surface finish. Applies standard zero-offset squish. Requires a thin layer of liquid glue or glue stick as a release agent when printing PETG, TPU, or ABS to prevent permanent thermal welding.</li>
+<li><strong>Engineering Plate</strong>: Optimized for high-temperature engineering polymers (ABS, ASA, PC, PA). Operates at elevated temperatures (80–110°C). Requires liquid adhesive to maintain adhesion and prevent warping over long print cycles.</li>
+</ul>
+<h3><strong>Syncing the AMS 2 Pro &amp; External Spool Routing</strong></h3>
+<p>The Automatic Material System 2 Pro (AMS 2 Pro) incorporates a 4-slot internal drive hub paired with a 65°C active filament drying system.</p>
+<ol>
+<li><strong>AMS Syncing</strong>: Navigate to the <strong>Prepare</strong> or <strong>Device</strong> tab and click <strong>Sync Filament</strong>. Bambu Studio reads the RFID tags on official Bambu spools to automatically populate material type, color, and volumetric limits.</li>
+<li><strong>Third-Party Filament Mapping</strong>: For un-tagged filaments (e.g., Polymaker, eSUN, Hatchbox), manually map each slot (1–4). Select the matching generic preset:</li>
+<ul>
+<li>Polymaker PolyTerra PLA → <strong>Generic PLA</strong> or <strong>PolyTerra PLA</strong> preset.</li>
+<li>eSUN PolyLite PETG → <strong>Generic PETG</strong> or <strong>eSUN PETG</strong> preset.</li>
+</ul>
+<li><strong>External Spool Configuration</strong>: The rear external spool holder bypasses the AMS internal PTFE drive path. Use the external spool path for all flexible elastomers (TPU 95A / 85A), brittle specialty support materials, and high-abrasion carbon-fiber filaments that exceed AMS roller bending tolerances.</li>
+</ol>
+<hr class="section-divider">
+<h2><strong>2. X2D Dual-Nozzle Routing Rules in Bambu Studio</strong></h2>
+<p>The Bambu Lab X2D Combo utilizes an asymmetric dual-extrusion system designed to maximize throughput and surface quality while controlling purge waste.</p>
+<div class="table-toolbar">
+<span class="table-badge">Table 1 &middot; 5 rows</span>
+<input type="text" class="table-search" placeholder="Filter rows in this table..." oninput="filterTable('tab3_tbl_1', this.value)">
+</div>
+<div class="table-container"><table id="tab3_tbl_1" class="data-table"><thead><tr>
+<th>Hardware Feature</th>
+<th>Main Extruder</th>
+<th>Auxiliary Extruder</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Drive Architecture</strong></td>
+<td>Toolhead-Mounted Direct-Drive</td>
+<td>Rear-Panel Mounted Remote Bowden</td>
+</tr>
+<tr>
+<td><strong>Feeding Mechanism</strong></td>
+<td>Dual Hardened Steel Gears</td>
+<td>Remote Drive Wheel + PTFE Feed Tube</td>
+</tr>
+<tr>
+<td><strong>Max Temperature</strong></td>
+<td>300°C</td>
+<td>250°C</td>
+</tr>
+<tr>
+<td><strong>Max Motion Kinematics</strong></td>
+<td>1000 mm/s speed, 20,000 mm/s² accel</td>
+<td>Stationary Remote Feed (Toolhead docked/swapped)</td>
+</tr>
+<tr>
+<td><strong>Compatible Materials</strong></td>
+<td>ALL (PLA, PETG, ABS, ASA, PC, PA, TPU, CF/GF)</td>
+<td>Standard PLA, Standard PETG, PVA, Breakaway Support</td>
+</tr>
+</tbody></table></div>
+<pre class="ascii-diagram">                       ┌──────────────────────────────────────────┐
+                       │           BAMBU LAB X2D COMBO            │
+                       └────────────────────┬─────────────────────┘
+                                            │
+                   ┌────────────────────────┴────────────────────────┐
+                   │                                                 │
+                   ▼                                                 ▼
+     ┌───────────────────────────┐                     ┌───────────────────────────┐
+     │       MAIN EXTRUDER       │                     │    AUXILIARY EXTRUDER     │
+     ├───────────────────────────┤                     ├───────────────────────────┤
+     │ • Direct-Drive in Toolhead│                     │ • Remote Bowden (Rear)    │
+     │ • Max Temp: 300°C         │                     │ • Max Temp: 250°C         │
+     │ • Max Speed: 1000 mm/s    │                     │ • Remote PTFE Feeding     │
+     ├───────────────────────────┤                     ├───────────────────────────┤
+     │ Compatible Materials:     │                     │ Best Use Cases:           │
+     │  - PLA, PETG, ABS, ASA    │                     │  - Support Interface Only │
+     │  - PC, PA, PA-CF, PET-CF  │                     │  - Secondary PLA/PETG     │
+     │  - TPU (Direct-Drive path)│                     │    Color (No AMS Purge)   │
+     └───────────────────────────┘                     └─────────────┬─────────────┘
+                                                                     │
+                                                       ┌─────────────┴─────────────┐
+                                                       │  STRICT HARDWARE LIMITS   │
+                                                       ├───────────────────────────┤
+                                                       │ 🚫 NO TPU (Tube Buckle)   │
+                                                       │ 🚫 NO CF/GF (Bowden Wear) │
+                                                       │ 🚫 NO Temp &gt;250°C (Hotend)│
+                                                       └───────────────────────────┘</pre>
+<h3><strong>Assigning the Auxiliary Nozzle in Bambu Studio</strong></h3>
+<h4><strong>Best Use Case 1: Dedicated Support Interface</strong></h4>
+<p>Using an incompatible material for support interfaces (e.g., PETG interface for PLA model, or PVA for water-soluble removal) eliminates the need for a Z-distance gap, yielding flat overhang surfaces.</p>
+<ol>
+<li>In the <strong>Support</strong> tab, set <strong>Support Option</strong> to Enabled.</li>
+<li>Under <strong>Support/raft interface</strong>, select the filament assigned to the Auxiliary Nozzle (e.g., Slot Ext-Aux: Support for PLA or Generic PETG).</li>
+<li>Set <strong>Top Z Distance</strong> to 0.00 mm and <strong>Top Interface Spacing</strong> to 0.00 mm.</li>
+<li>Slicer Re-group Prompt: Upon clicking <strong>Slice Plate</strong>, Bambu Studio displays a Nozzle Re-group dialog. Ensure only the <strong>Interface Layers</strong> are assigned to the Auxiliary Nozzle while the support body/scaffolding remains assigned to the Main Nozzle. This minimizes toolhead swaps to 2–3 swaps per overhang boundary.</li>
+</ol>
+<h4><strong>Best Use Case 2: Dual-Color Printing Without AMS Purging</strong></h4>
+<p>When printing a two-color object in PLA or PETG, assign Primary Color to Main Nozzle (Extruder 1) and Secondary Color to Auxiliary Nozzle (Extruder 2). Because both nozzles maintain independent thermal management, switching between primary and secondary colors requires no purge tower volume, reducing print times and eliminating purge waste.</p>
+<h3><strong>Strict Hardware Exclusions for the Auxiliary Nozzle</strong></h3>
+<ul>
+<li><strong>NEVER assign TPU / Flexible Elastomers</strong>: The remote Bowden PTFE line creates high frictional resistance. Soft flexible filament will buckle, twist, and jam inside the rear Bowden drive assembly. TPU must run via the Direct-Drive Main Toolhead.</li>
+<li><strong>NEVER assign Composite Filaments (PLA-CF, PETG-CF, PA6-CF, Wood)</strong>: Abrasive fibers erode standard Bowden PTFE tubing and rapidly wear non-hardened brass/steel aux hotend nozzles.</li>
+<li><strong>NEVER assign High-Temperature Materials (&gt;250°C)</strong>: Materials such as Polycarbonate (PC), Nylon (PA6/PA12), or PPA exceed the 250°C thermal limit of the auxiliary hotend throat, which will cause PTFE liner degradation and thermal runaway errors.</li>
+</ul>
+<hr class="section-divider">
+<h2><strong>3. Toolbar Tools Overview</strong></h2>
+<ul>
+<li><strong>Move (Shortcut: M)</strong>: Adjusts model position on X, Y, and Z axes. Includes an auto-center function and manual coordinate entry for multi-part positioning.</li>
+<li><strong>Rotate (Shortcut: R)</strong>: Rotates models along X, Y, and Z axes in discrete angular increments (holding Shift snaps to 45°/90°).</li>
+<li><strong>Scale (Shortcut: S)</strong>: Scales model dimensions uniformly or non-uniformly across individual axes. Includes absolute millimeter and percentage inputs.</li>
+<li><strong>Lay on Face (Shortcut: F)</strong>: Allows the user to click any flat planar face on the 3D model to reorient that face flush against the build plate. This is the primary tool for optimizing print orientation to minimize overhangs and maximize bed contact surface area.</li>
+<li><strong>Cut (Shortcut: C)</strong>: Splits models using arbitrary planar or planar-joint cuts. Features integrated male/female dowel pins, snap-fit connectors, and dovetail joint generators to enable large-part printing across multiple build plates.</li>
+<li><strong>Support Painting (Shortcut: L)</strong>:</li>
+<ul>
+<li><strong>Left-Click (Purple)</strong>: Applies Enforce Support brushes to critical regions.</li>
+<li><strong>Right-Click (Red)</strong>: Applies Block Support brushes to non-critical internal overhangs or cosmetic faces where supports are unnecessary.</li>
+<li><strong>Brush Types</strong>: Sphere, Circle, Fill (selects contiguous topological surfaces), and Smart Fill (detects overhang angles dynamically).</li>
+</ul>
+<li><strong>Seam Painting (Shortcut: P)</strong>: Allows manual painting of the Z-seam start/stop location. Use brush strokes to force the seam into sharp inner corners or non-visible rear geometry.</li>
+<li><strong>Color Painting (Shortcut: N)</strong>: Paints multi-material color zones onto single-mesh STL files using Height Range, Fill, Circle, or Triangle Bucket tools.</li>
+<li><strong>Slice Plate &amp; Preview Inspection</strong>:</li>
+<ul>
+<li><strong>Color Scheme Dropdown</strong>: Switch view mode from Filament to Line Type (inspecting outer wall vs. inner wall vs. infill), Speed (checking deceleration zones), Flow (identifying volumetric bottlenecking), Fan Speed, and Layer Time (identifying thermal accumulation risks).</li>
+<li><strong>Vertical Layer Slider</strong>: Inspect individual layer toolpaths from layer 1 up to the top surface. Verify bridging vectors, support interface clearance, and infill cross-over patterns prior to sending the job to the printer.</li>
+</ul>
+</ul>
+<hr class="section-divider">
+<h1><strong>SECTION 2: Walkthrough of Bambu Studio Advanced Settings</strong></h1>
+<p>Enable the <strong>Advanced</strong> toggle switch in the left-hand panel. To unlock deep hardware settings, navigate to <strong>Preferences</strong> → <strong>Developer Mode</strong> → Enable.</p>
+<pre class="ascii-diagram">                    ┌──────────────────────────────────────────────┐
+                    │      BAMBU STUDIO ADVANCED CONFIGURATION     │
+                    └──────────────────────┬───────────────────────┘
+                                           │
+       ┌──────────────────┬────────────────┴────────────────┬──────────────────┐
+       ▼                  ▼                                 ▼                  ▼
+┌──────────────┐   ┌──────────────┐                  ┌──────────────┐   ┌──────────────┐
+│ QUALITY TAB  │   │ STRENGTH TAB │                  │  SPEED TAB   │   │ SUPPORT TAB  │
+├──────────────┤   ├──────────────┤                  ├──────────────┤   ├──────────────┤
+│• Line Widths │   │• Wall Loops  │                  │• Wall Speeds │   │• Tree/Normal │
+│• Wall Gen    │   │• Patterns    │                  │• Accel Limits│   │• Z-Distance  │
+│• Precision   │   │• Gyroid/Cubic│                  │• Travel Speed│   │• Interfaces  │
+│• Ironing     │   │• Shell Count │                  │• Jerk Tuning │   │• XY Distance │
+└──────────────┘   └──────────────┘                  └──────────────┘   └──────────────┘</pre>
+<hr class="section-divider">
+<h2><strong>1. Quality Tab</strong></h2>
+<h3><strong>Layer Height &amp; First Layer Height</strong></h3>
+<ul>
+<li><strong>Layer Height</strong>: Sets primary Z-axis resolution. Standard baseline is 0.20 mm. Ultra-fine cosmetic prints use 0.08 mm – 0.12 mm. Coarse draft parts use 0.28 mm – 0.32 mm (on a 0.4 mm nozzle). Lower layer heights improve vertical step resolution but increase overall layer count and print duration.</li>
+<li><strong>First Layer Height</strong>: Always set between 0.20 mm and 0.24 mm, regardless of primary layer height. A thicker first layer provides structural tolerance for minor bed un-levelness and increases physical surface area contact for improved bed adhesion.</li>
+</ul>
+<h3><strong>Line Width Parameters</strong></h3>
+<p>Line width defines the cross-sectional geometry of extruded plastic beads, calculated as a ratio relative to nozzle diameter (D_nozzle = 0.4 mm).</p>
+<ul>
+<li><strong>Default Line Width</strong>: Set to 0.42 mm (105% of nozzle diameter) for consistent inter-bead pressure.</li>
+<li><strong>First Layer Line Width</strong>: Set to 0.50 mm – 0.60 mm. Widening the first layer bead forces molten polymer sideways under high nozzle pressure, filling PEI surface micro-valleys to optimize first-layer adhesion.</li>
+<li><strong>Outer Wall Line Width</strong>: Set to 0.42 mm (or 0.35 mm for fine details). Thinner outer wall widths improve corner crispness and fine feature accuracy by reducing material buildup at directional changes.</li>
+<li><strong>Inner Wall Line Width</strong>: Set to 0.45 mm. Slightly wider inner walls increase structural shear strength between internal perimeters without impacting external cosmetic tolerances.</li>
+<li><strong>Top Surface Line Width</strong>: Set to 0.40 mm – 0.42 mm. Narrower top surface lines pack adjacent extrusions more tightly, reducing small surface gaps.</li>
+<li><strong>Sparse Infill Line Width</strong>: Set to 0.45 mm – 0.50 mm. Wider infill lines allow the extruder to push more material per linear millimeter, accelerating internal structural filling.</li>
+<li><strong>Support Line Width</strong>: Set to 0.38 mm. Thinner support lines promote clean breakaway characteristics and lower total support material consumption.</li>
+</ul>
+<h3><strong>Seam Position &amp; Scarf Joint Seams</strong></h3>
+<ul>
+<li><strong>Seam Position</strong>:</li>
+<ul>
+<li>Aligned: Aligns start/stop points in a single vertical column. Easy to clean manually, but creates a visible vertical line.</li>
+<li>Back: Forces Z-seams to the rear-most coordinates of the model, hiding them from front cosmetic view.</li>
+<li>Random: Distributes start/stop points pseudo-randomly across the perimeter. Prevents concentrated vertical seam lines, but creates small surface zits across the model.</li>
+<li>Nearest: Places the seam at the nearest corner relative to the preceding travel path, minimizing travel moves.</li>
+</ul>
+<li><strong>Scarf Joint Seam</strong>: Replaces traditional abrupt start/stop extrusions with a ramped overlapping profile. As the toolhead reaches the end of a perimeter loop, volumetric flow ramps down exponentially while simultaneously ramping up at the start of the adjacent loop. This makes Z-seams virtually invisible on smooth, cylindrical, or curved surfaces.</li>
+</ul>
+<h3><strong>Precision &amp; Resolution Parameters</strong></h3>
+<ul>
+<li><strong>Slice Gap Closing Radius</strong>: Controls how small internal geometric gaps are closed during slicing. Default 0.04 mm.</li>
+<li><strong>Resolution</strong>: Defines the tolerance threshold used to simplify 3D mesh vectors into 2D toolpaths. Setting this to 0.012 mm prevents toolhead stutter caused by buffer underruns when processing high-poly STL models.</li>
+<li><strong>Arc Fitting (G2/G3 Conversion)</strong>: Converts hundreds of short linear G1 move segments along curved walls into unified G2 (clockwise) or G3 (counter-clockwise) arc commands. This reduces G-code file size, smooths motion, and prevents micro-stuttering on curved geometry.</li>
+<li><strong>X-Y Hole Compensation</strong>: Adjusts internal hole diameters without altering external model dimensions. Polymer contraction during cooling typically causes printed holes to shrink by 0.1–0.2 mm. Setting this value to +0.10 mm compensates for this thermal shrinkage, allowing press-fit bearings and bolts to fit accurately.</li>
+<li><strong>X-Y Contour Compensation</strong>: Uniformly expands or contracts external outer boundaries (useful for adjusting overall mating fit tolerances).</li>
+<li><strong>Elephant Foot Compensation</strong>: Automatically shrinks the first layer perimeter inward by 0.10 mm – 0.15 mm. This compensates for the outward plastic flare (&quot;elephant&#x27;s foot&quot;) caused by initial layer bed squish.</li>
+</ul>
+<h3><strong>Ironing Parameters</strong></h3>
+<p>Ironing passes the heated nozzle over flat top surfaces at a close Z-height while extruding a minimal flow of plastic, melting and smoothing high spots to create an injection-molded surface finish.</p>
+<ul>
+<li><strong>Ironing Type</strong>: Topmost Surface Only (smooths final top layer) vs. All Solid Layers (smooths every flat internal deck; increases total print time).</li>
+<li><strong>Ironing Speed</strong>: 15 – 30 mm/s. Slower speeds allow heat to transfer effectively into high spots on the plastic surface.</li>
+<li><strong>Ironing Flow</strong>: 10% – 15%. Provides just enough molten fill to seal micro-voids without causing plastic accumulation around the nozzle tip.</li>
+<li><strong>Ironing Line Spacing</strong>: 0.15 – 0.20 mm. Defines stepover distance between successive ironing paths.</li>
+</ul>
+<h3><strong>Wall Generator: Classic vs. Arachne</strong></h3>
+<ul>
+<li><strong>Classic</strong>: Extrudes perimeters using a fixed, static line width (e.g., exactly 0.42 mm). When encountering variable geometry (such as tapering wall sections), Classic mode leaves internal voids or requires erratic gap-filling movements.</li>
+<li><strong>Arachne</strong>: Dynamically scales line width on the fly using variable flow control. It expands or contracts extrusion width to fill tapering geometry without gap filling, eliminating extra travel moves and preventing micro-vibrations on thin-walled parts.</li>
+<li><strong>Detect Thin Walls</strong>: (Available in Classic mode) Enables automatic line width reduction down to 50% of nozzle diameter to capture thin internal wall details.</li>
+</ul>
+<h3><strong>Wall Printing Order</strong></h3>
+<ul>
+<li><strong>Inner/Outer</strong>: Prints inner structural perimeters first, followed by the outermost cosmetic wall.</li>
+<ul>
+<li><em>Advantage</em>: Inner walls provide a stable physical shelf for outer wall extrusion, resulting in better overhang performance and reduced corner warping.</li>
+</ul>
+<li><strong>Outer/Inner</strong>: Prints outer cosmetic perimeters first.</li>
+<ul>
+<li><em>Advantage</em>: Yields higher dimensional accuracy and uniform surface gloss by eliminating internal wall backpressure during outer wall deposition.</li>
+</ul>
+<li><strong>Inner/Outer/Inner</strong>: Alternates wall ordering across layered paths for dense multi-wall industrial parts.</li>
+</ul>
+<h3><strong>Overhang Speed &amp; Flow Deceleration</strong></h3>
+<p>Controls spatial deceleration zones across four steepness tiers:</p>
+<ul>
+<li><strong>Overhang Tiers</strong>: 10%–25%, 25%–50%, 50%–75%, 75%–100% overhang angles.</li>
+<li><strong>Operation</strong>: As overhang steepness increases, Bambu Studio reduces feed rate dynamically (e.g., down to 10–15 mm/s on 75–100% overhangs) and ramps the part cooling fan to 100%. Slow extrusion allows cooling air to freeze molten polymer filaments before gravity causes them to sag or droop.</li>
+</ul>
+<h3><strong>Bridge Speed &amp; Bridge Flow Ratio</strong></h3>
+<ul>
+<li><strong>Bridge Speed</strong>: 30 – 50 mm/s. Controls toolhead speed when extruding across unsupported open air gaps between distant pillars.</li>
+<li><strong>Bridge Flow Ratio</strong>: 0.85 – 0.90. Reduces volumetric output to slightly stretch extruded polymer strands across the gap under tension, preventing sag without snapping the continuous filament line.</li>
+</ul>
+<hr class="section-divider">
+<h2><strong>2. Strength Tab</strong></h2>
+<h3><strong>Wall Loops (Perimeters)</strong></h3>
+<p>Wall count is the single most critical structural parameter in FDM 3D printing. Increasing wall count from 2 to 5 provides a larger increase in structural shear and bending strength than increasing sparse infill density from 20% to 80%.</p>
+<ul>
+<li><strong>Standard Parts</strong>: 2 to 3 wall loops.</li>
+<li><strong>Functional Hardware/Load Bearing</strong>: 4 to 6 wall loops.</li>
+</ul>
+<h3><strong>Top/Bottom Shell Layers &amp; Thickness</strong></h3>
+<ul>
+<li><strong>Top Shell Layers</strong>: Minimum 4 – 5 layers (or 0.8 mm – 1.0 mm total thickness). Prevents &quot;pillowing&quot; (surface sagging over hollow infill cells).</li>
+<li><strong>Bottom Shell Layers</strong>: Minimum 3 – 4 layers (or 0.6 mm – 0.8 mm total thickness). Ensures structural sealing and bed interface durability.</li>
+</ul>
+<h3><strong>Top/Bottom Surface Patterns</strong></h3>
+<ul>
+<li><strong>Monotonic</strong>: Extrudes top surface lines in a single continuous sweep direction across individual sub-regions. Ensures uniform surface light reflectivity with no visible directional boundary lines.</li>
+<li><strong>Monotonic Line</strong>: Variant of monotonic that uses continuous unbroken path turns, minimizing nozzle retractions.</li>
+<li><strong>Concentric</strong>: Traces top geometry from the outer perimeter inward in concentric loops. Ideal for circular geometry or flexible parts.</li>
+<li><strong>Hilbert Curve / Octagram Spiral</strong>: Decorative non-linear fill patterns that distribute mechanical stress isotropically across flat faces.</li>
+</ul>
+<h3><strong>Sparse Infill Density &amp; Pattern Options</strong></h3>
+<ul>
+<li><strong>Grid / Rectilinear</strong>: 2D grid structure. <em>Caution</em>: Grid infill crosses extruded lines on the same layer plane, causing nozzle clicking, physical collisions, and high-speed vibration on large builds.</li>
+<li><strong>Gyroid</strong>: Continuous 3D wave structure.</li>
+<ul>
+<li><em>Advantages</em>: Provides equal isotropic strength in X, Y, and Z axes. Never crosses its own toolpath on a single layer plane, preventing high-speed toolhead collisions and mechanical wear. Ideal for functional load-bearing parts and flexible TPU builds.</li>
+</ul>
+<li><strong>Cubic / Adaptive Cubic</strong>: 3D octahedral pattern. Adaptive cubic automatically reduces infill density in deep internal cores while increasing density near top skin shells, saving print time and material weight.</li>
+<li><strong>Lightning</strong>: Generates internal tree-like scaffolding structures that support top flat ceilings only. Eliminates internal structural mass; intended strictly for non-functional display models.</li>
+</ul>
+<pre class="ascii-diagram">┌─────────────────────────────────────────────────────────────────────────┐
+│                        INFILL PATTERN SELECTION                         │
+├───────────────────┬───────────────────┬────────────────┬────────────────┤
+│       GYROID      │  ADAPTIVE CUBIC   │   LIGHTNING    │ GRID / RECTIL. │
+├───────────────────┼───────────────────┼────────────────┼────────────────┤
+│ • Isotropic 3D    │ • Variable density│ • Top support  │ • Simple 2D    │
+│   strength        │ • Saves material  │   scaffolding  │   grid pattern │
+│ • Non-crossing    │ • High 3D load    │ • Lowest weight│ ⚠️ Crosses path│
+│   toolpaths       │   capacity        │ • Non-functional│ ⚠️ Nozzle hit  │
+│ • Best overall    │ • Best for large  │   display models│   risk at high │
+│   functional use  │   solid volumes   │   only         │   speeds       │
+└───────────────────┴───────────────────┴────────────────┴────────────────┘</pre>
+<h3><strong>Advanced Strength Settings</strong></h3>
+<ul>
+<li><strong>Infill/Wall Overlap</strong>: 15% – 20%. Controls how far infill lines extend into inner wall perimeters to bind internal infill structure to external shells.</li>
+<li><strong>Ensure Vertical Shell Thickness</strong>: Automatically adds solid infill reinforcement beneath sloping outer walls to prevent thin internal voids.</li>
+<li><strong>Minimum Sparse Infill Threshold</strong>: Converts tiny internal volumes below a set area threshold (e.g., 15 mm²) into 100% solid fill, preventing thin vertical pins or standoffs from snapping off.</li>
+</ul>
+<hr class="section-divider">
+<h2><strong>3. Speed Tab</strong></h2>
+<h3><strong>First Layer Speeds</strong></h3>
+<ul>
+<li><strong>First Layer Speed</strong>: Set to 20 – 35 mm/s. Slow initial extrusion provides maximum contact duration for hot polymer to wet and adhere to the build plate.</li>
+<li><strong>First Layer Infill Speed</strong>: Set to 30 – 50 mm/s. Maintains controlled bed adhesion across internal bottom surfaces.</li>
+</ul>
+<h3><strong>Wall Speeds</strong></h3>
+<ul>
+<li><strong>Outer Wall Speed</strong>: Set to 60 – 120 mm/s for cosmetic surfaces (or 40 – 60 mm/s for high-gloss Silk PLA). Slower outer wall speed improves surface finish and minimizes ringing/ghosting artifacts.</li>
+<li><strong>Inner Wall Speed</strong>: Set to 200 – 350 mm/s. Inner walls are isolated from cosmetic view, allowing faster execution rates.</li>
+</ul>
+<h3><strong>Travel Speed &amp; Acceleration Profiling</strong></h3>
+<ul>
+<li><strong>Max Travel Speed</strong>: The X2D CoreXY motion system supports travel speeds up to 1000 mm/s.</li>
+<li><strong>Acceleration Limits</strong>:</li>
+<ul>
+<li><strong>Normal Print Acceleration</strong>: Set between 10,000 and 20,000 mm/s².</li>
+<li><strong>Outer Wall Acceleration</strong>: Limit to 3,000 – 5,000 mm/s². Lower acceleration on outer walls minimizes mechanical frame vibration, eliminating corner ringing and corner bulging on mechanical press-fits.</li>
+<li><strong>First Layer Acceleration</strong>: Set to 500 – 1,000 mm/s² to prevent sharp direction changes from pulling un-cured initial perimeters off the build plate.</li>
+</ul>
+</ul>
+<hr class="section-divider">
+<h2><strong>4. Support Tab</strong></h2>
+<h3><strong>Support Structure Types</strong></h3>
+<ul>
+<li><strong>Normal (Auto / Manual)</strong>: Generates traditional vertical scaffolding blocks directly beneath overhang areas. Best suited for flat planar undersides and rectilinear geometric steps.</li>
+<li><strong>Tree (Auto / Manual)</strong>: Generates organic, trunk-and-branch hollow structures that curve around the model to reach overhang zones.</li>
+<ul>
+<li><em>Advantages</em>: Significantly reduces contact point surface area, minimizes material usage, speeds up post-processing, and avoids placing support roots on lower cosmetic surfaces.</li>
+</ul>
+</ul>
+<h3><strong>Critical Support Parameters</strong></h3>
+<ul>
+<li><strong>Threshold Angle</strong>: Measured relative to the horizontal plane. Default is 30° (meaning any face angled lower than 30° relative to the bed triggers support generation).</li>
+<li><strong>Top Z Distance</strong>:</li>
+<ul>
+<li><em>Same-Material Support</em>: Set to 0.16 mm – 0.20 mm. Provides a air gap between support interface roofs and model surfaces to allow easy breakaway removal.</li>
+<li><em>Dedicated Support Filament / Auxiliary Interface</em>: Set to 0.00 mm. With zero gap, the support interface acts as a flat mold surface, producing a smooth underside finish.</li>
+</ul>
+<li><strong>Top Interface Layers</strong>: Set to 2 – 3 layers. Dense interface layers create a uniform ceiling over loose support columns before model extrusion begins.</li>
+<li><strong>Top Interface Spacing</strong>: Set to 0.5 mm for standard breakaway supports, or <strong>0.00 mm</strong> for dedicated support materials (e.g., PVA, PETG-on-PLA interface) to create a solid, continuous support roof.</li>
+<li><strong>Support/Object XY Distance</strong>: Set to 0.35 mm – 0.45 mm. Controls lateral clearance between vertical support columns and adjacent walls, preventing support structures from fusing to side perimeters.</li>
+</ul>
+<hr class="section-divider">
+<h2><strong>5. Others Tab (Bed Adhesion, Prime Tower, Fuzzy Skin, Chamber)</strong></h2>
+<h3><strong>Brim Selection &amp; Brim-Object Gap</strong></h3>
+<ul>
+<li><strong>Brim Types</strong>:</li>
+<ul>
+<li>Auto: Slicer applies brims dynamically based on calculated bed contact surface area.</li>
+<li>Outer Brim Only: Extrudes flat sacrificial perimeter lines around the external base of the part to resist upward warping forces.</li>
+<li>Inner and Outer Brim: Extrudes brims around both external edges and internal cutout holes.</li>
+<li>Painted Brim: Allows manual application of brim structures to sharp outer corners using brush tools.</li>
+</ul>
+<li><strong>Brim-Object Gap</strong>: Default 0.10 mm. An offset of 0.10 mm provides structural anchor leverage during printing while allowing the brim to be peeled off cleanly by hand after cooling.</li>
+</ul>
+<h3><strong>Prime Tower &amp; Multi-Material Purging</strong></h3>
+<ul>
+<li><strong>Prime Tower</strong>: A dedicated rectangular tower printed alongside multi-material/dual-nozzle jobs.</li>
+<ul>
+<li><em>Function</em>: When transitioning between filaments or swapping nozzles, the toolhead extrudes into the prime tower to re-establish internal hotend chamber pressure and stabilize flow before returning to the model surface.</li>
+</ul>
+<li><strong>Flush Volumes</strong>: Controls purge waste during color changes via the AMS. Access the <strong>Flush Volumes</strong> matrix to adjust purge ratios. Reduce the global multiplier (e.g., to 0.6 – 0.7) when transitioning between similar dark tones; keep the multiplier ≥ 1.0 when transitioning from high-pigment dark colors (e.g., Black) to light colors (e.g., White).</li>
+</ul>
+<h3><strong>Fuzzy Skin Settings</strong></h3>
+<p>Fuzzy skin introduces controlled micro-jitter movements into outer wall toolpaths, producing a textured surface finish that hides layer lines and provides enhanced tactile grip.</p>
+<ul>
+<li><strong>Fuzzy Skin Mode</strong>: None, Outer Walls Only, or All Walls.</li>
+<li><strong>Fuzzy Skin Thickness</strong>: 0.1 – 0.3 mm (controls lateral depth of skin jitter bumps).</li>
+<li><strong>Fuzzy Skin Point Distance</strong>: 0.5 – 1.0 mm (controls linear distance between adjacent jitter points).</li>
+</ul>
+<h3><strong>Active Chamber Thermal Management</strong></h3>
+<p>Under <strong>Filament Settings</strong> → <strong>Cooling/Chamber</strong>:</p>
+<ul>
+<li>Active Chamber Temperature control operates the X2D&#x27;s 65°C internal air heating system.</li>
+<li><em>High-Temp Engineering Plastics (ABS, ASA, PC, PA6)</em>: Set Chamber Target to <strong>60°C – 65°C</strong>. Active chamber heating reduces internal thermal gradients across tall prints, preventing layer delamination and corner warping.</li>
+<li><em>Low-Temp Plastics (PLA, PETG, TPU)</em>: Set Chamber Target to <strong>Off / 0°C</strong>. For PLA builds, open the top glass riser or front door to prevent heat creep Jams when ambient chamber temperatures exceed 35°C.</li>
+</ul>
+<hr class="section-divider">
+<h1><strong>SECTION 3: Best Slicer Settings for ALL Application Profiles</strong></h1>
+<p>The following reference matrix outlines slicer configurations for 12 distinct application profiles on the Bambu Lab X2D Combo system.</p>
+<div class="table-toolbar">
+<span class="table-badge">Table 2 &middot; 12 rows</span>
+<input type="text" class="table-search" placeholder="Filter rows in this table..." oninput="filterTable('tab3_tbl_2', this.value)">
+</div>
+<div class="table-container"><table id="tab3_tbl_2" class="data-table"><thead><tr>
+<th>ID</th>
+<th>Profile Name</th>
+<th>Layer Height</th>
+<th>Wall Loops</th>
+<th>Infill Density</th>
+<th>Primary Speed</th>
+<th>Chamber / Bed</th>
+</tr></thead><tbody>
+<tr>
+<td>01</td>
+<td>Rapid Prototyping Drafts</td>
+<td>0.28 mm</td>
+<td>2</td>
+<td>10% Sparse Cub.</td>
+<td>250 - 350 mm/s</td>
+<td>Off / 55°C</td>
+</tr>
+<tr>
+<td>02</td>
+<td>High-Detail Miniatures</td>
+<td>0.08 mm</td>
+<td>3</td>
+<td>20% Gyroid</td>
+<td>40 - 80 mm/s</td>
+<td>Off / 55°C</td>
+</tr>
+<tr>
+<td>03</td>
+<td>Glossy Silk Vases / Decor</td>
+<td>0.20 mm</td>
+<td>3 (or Outer)</td>
+<td>0% - 15% Gyr.</td>
+<td>40 - 50 mm/s</td>
+<td>Off / 55°C</td>
+</tr>
+<tr>
+<td>04</td>
+<td>Mechanical Load-Bearing Parts</td>
+<td>0.20 mm</td>
+<td>6</td>
+<td>40% Gyroid</td>
+<td>150 - 200 mm/s</td>
+<td>Off / 60°C</td>
+</tr>
+<tr>
+<td>05</td>
+<td>Snap-Fit Enclosures / Hinges</td>
+<td>0.16 mm</td>
+<td>4</td>
+<td>25% Gyroid</td>
+<td>120 - 180 mm/s</td>
+<td>Off / 70°C</td>
+</tr>
+<tr>
+<td>06</td>
+<td>Print-in-Place Articulations</td>
+<td>0.16 mm</td>
+<td>4</td>
+<td>15% Gyroid</td>
+<td>100 - 150 mm/s</td>
+<td>Off / 55°C</td>
+</tr>
+<tr>
+<td>07</td>
+<td>Watertight Fluid Reservoirs</td>
+<td>0.16 mm</td>
+<td>6</td>
+<td>100% Solid</td>
+<td>60 - 100 mm/s</td>
+<td>Off / 75°C</td>
+</tr>
+<tr>
+<td>08</td>
+<td>Transparent Diffusers/Lenses</td>
+<td>0.12 mm</td>
+<td>0 (Infill)</td>
+<td>100% Rect. (0°)</td>
+<td>20 - 30 mm/s</td>
+<td>Off / 80°C</td>
+</tr>
+<tr>
+<td>09</td>
+<td>Flexible TPU Components</td>
+<td>0.20 mm</td>
+<td>4</td>
+<td>20% Gyroid</td>
+<td>30 - 45 mm/s</td>
+<td>Off / 40°C</td>
+</tr>
+<tr>
+<td>10</td>
+<td>High-Heat ABS/ASA/PC Structural</td>
+<td>0.20 mm</td>
+<td>5</td>
+<td>30% Gyroid</td>
+<td>100 - 150 mm/s</td>
+<td>65°C / 100°C</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Multi-Color Flat Signage</td>
+<td>0.20 mm</td>
+<td>3</td>
+<td>20% Grid</td>
+<td>25 mm/s (L1)</td>
+<td>Off / 65°C</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Dual-Nozzle Zero-Gap Support</td>
+<td>0.20 mm</td>
+<td>4</td>
+<td>20% Gyroid</td>
+<td>Standard Config</td>
+<td>Mat. Dependent</td>
+</tr>
+</tbody></table></div>
+<hr class="section-divider">
+<h2><strong>Profile Parameter Matrix &amp; Engineering Justification</strong></h2>
+<h3><strong>Profile 01: Rapid Prototyping &amp; Fit-Check Drafts</strong></h3>
+<ul>
+<li><strong>Layer Height</strong>: 0.28 mm (First Layer: 0.24 mm).</li>
+<li><strong>Wall Loops</strong>: 2. <strong>Top/Bottom Shells</strong>: 3 Top / 3 Bottom.</li>
+<li><strong>Infill</strong>: 10% Adaptive Cubic.</li>
+<li><strong>Speed Profiles</strong>: Outer Wall: 200 mm/s, Inner Wall: 350 mm/s, Infill: 400 mm/s.</li>
+<li><strong>Support</strong>: Tree Auto (Threshold 30°).</li>
+<li><strong>Chamber</strong>: Off. <strong>Bed Temp</strong>: 55°C.</li>
+<li><strong>Engineering Justification</strong>: Maximizes volumetric throughput. Using 0.28 mm layer height with 2 walls cuts print duration by up to 65% compared to baseline profiles. Adaptive cubic infill concentrates structural support only beneath top shells, minimizing material consumption during early fit-check iterations.</li>
+</ul>
+<h3><strong>Profile 02: High-Detail Miniatures, Statues &amp; Display Art</strong></h3>
+<ul>
+<li><strong>Layer Height</strong>: 0.08 mm (First Layer: 0.20 mm).</li>
+<li><strong>Wall Generator</strong>: Arachne mode.</li>
+<li><strong>Wall Loops</strong>: 3. <strong>Top/Bottom Shells</strong>: 7 Top / 6 Bottom.</li>
+<li><strong>Seam Style</strong>: Scarf Joint Seam enabled (placed in non-visible rear zones).</li>
+<li><strong>Speed Profiles</strong>: Outer Wall: 40 mm/s, Inner Wall: 80 mm/s, Acceleration Outer Wall: 2000 mm/s².</li>
+<li><strong>Support</strong>: Tree Manual (Slim branches, Top Z Distance: 0.14 mm).</li>
+<li><strong>Chamber</strong>: Off. <strong>Bed Temp</strong>: 55°C.</li>
+<li><strong>Engineering Justification</strong>: Thin 0.08 mm layer heights remove visible Z-axis step lines on sloping curves. Arachne wall generation scales extrusion widths down to sub-millimeter scales for detailed facial and topological features. Reduced outer wall speeds and lower acceleration rates eliminate frame resonance, preventing high-frequency ringing on fine surface details.</li>
+</ul>
+<h3><strong>Profile 03: Glossy Silk / Dual-Color Aesthetic Vases &amp; Decor</strong></h3>
+<ul>
+<li><strong>Layer Height</strong>: 0.20 mm.</li>
+<li><strong>Mode</strong>: Spiral Vase mode (where applicable) OR 3 Wall Loops with 0% Infill.</li>
+<li><strong>Nozzle Temperature Profile</strong>: Boost default hotend temp by <strong>+10°C</strong> (e.g., 230°C for Silk PLA).</li>
+<li><strong>Speed Profiles</strong>: Outer Wall locked to <strong>40 – 50 mm/s</strong> uniform speed.</li>
+<li><strong>Cooling Fans</strong>: Limit Max Part Fan Speed to 50%.</li>
+<li><strong>Chamber</strong>: Off. <strong>Bed Temp</strong>: 55°C.</li>
+<li><strong>Engineering Justification</strong>: Polymer crystalline structure and surface gloss in Silk PLA are highly sensitive to extrusion speed and temperature. Fluctuating toolhead speeds produce uneven surface gloss banding. Locking outer wall speed to a uniform 45 mm/s at higher temperatures ensures continuous polymer melting, yielding a consistent mirror-like sheen.</li>
+</ul>
+<h3><strong>Profile 04: Functional Mechanical Brackets, Jigs &amp; Load-Bearing Parts</strong></h3>
+<ul>
+<li><strong>Layer Height</strong>: 0.20 mm.</li>
+<li><strong>Wall Loops</strong>: <strong>5 to 6 Loops</strong> (provides ~2.4 mm solid outer shell perimeter).</li>
+<li><strong>Top/Bottom Shells</strong>: 5 Top / 5 Bottom.</li>
+<li><strong>Infill</strong>: <strong>35% – 50% Gyroid</strong>.</li>
+<li><strong>Precision Controls</strong>: X-Y Hole Compensation: +0.10 mm.</li>
+<li><strong>Speed Profiles</strong>: Outer Wall: 100 mm/s, Inner Wall: 180 mm/s, Acceleration: 5000 mm/s².</li>
+<li><strong>Chamber</strong>: Off. <strong>Bed Temp</strong>: 60°C.</li>
+<li><strong>Engineering Justification</strong>: Primary structural strength in FDM components derives from perimeter perimeters. 6 continuous wall loops distribute tensile and shear loads across the outer shell. Gyroid infill provides isotropic 3D support, preventing directional failure under multi-axis torsional loading. X-Y Hole Compensation pre-adjusts internal diameters for thermal contraction, yielding exact press-fit dimensions for bearing sleeves and dowels.</li>
+</ul>
+<h3><strong>Profile 05: Snap-Fit Enclosures &amp; Living Hinges</strong></h3>
+<ul>
+<li><strong>Layer Height</strong>: 0.16 mm (for tight vertical interlocking steps).</li>
+<li><strong>Material Selection</strong>: PETG, Tough PLA, or Polypropylene.</li>
+<li><strong>Wall Loops</strong>: 4. <strong>Top/Bottom Shells</strong>: 5 Top / 5 Bottom.</li>
+<li><strong>Infill</strong>: 25% Gyroid.</li>
+<li><strong>Corner Fillets</strong>: Minimum 1.0 mm radius applied in CAD to internal snap roots.</li>
+<li><strong>Elephant Foot Compensation</strong>: 0.15 mm.</li>
+<li><strong>Speed Profiles</strong>: Outer Wall: 80 mm/s, Inner Wall: 150 mm/s.</li>
+<li><strong>Chamber</strong>: Off. <strong>Bed Temp</strong>: 70°C (PETG).</li>
+<li><strong>Engineering Justification</strong>: Fine 0.16 mm layers reduce mechanical notch concentration along flex points. Increasing wall count to 4 ensures the flexing cantilever arm is composed entirely of continuous solid perimeters with no internal infill voids, preventing snap-fit tabs from shearing along internal layer lines.</li>
+</ul>
+<h3><strong>Profile 06: Print-in-Place Articulated Toys &amp; Fidgets</strong></h3>
+<ul>
+<li><strong>Layer Height</strong>: 0.16 mm – 0.20 mm.</li>
+<li><strong>Wall Loops</strong>: 4. <strong>Top/Bottom Shells</strong>: 4 Top / 4 Bottom.</li>
+<li><strong>Infill</strong>: 15% Gyroid.</li>
+<li><strong>Brim Configuration</strong>: <strong>DISABLED</strong> (Brims will bridge across mechanical clearance gaps and lock moving joints).</li>
+<li><strong>Elephant Foot Compensation</strong>: <strong>0.15 mm</strong> (prevents initial layer squish from fusing moving floor joints).</li>
+<li><strong>Global Clearances</strong>: Designed with ≥ 0.30 mm radial clearance in CAD.</li>
+<li><strong>Speed Profiles</strong>: First Layer Speed: 20 mm/s. Outer Wall: 80 mm/s.</li>
+<li><strong>Engineering Justification</strong>: Eliminating the brim and applying aggressive Elephant Foot Compensation prevents molten plastic on the first layer from bridging mechanical clearance voids. High perimeter counts reinforce internal hinge pins, enabling smooth articulated movement straight off the build plate.</li>
+</ul>
+<h3><strong>Profile 07: Watertight Containers, Planters &amp; Fluid Reservoirs</strong></h3>
+<ul>
+<li><strong>Layer Height</strong>: 0.16 mm (lower layer heights reduce mechanical micro-voids between layers).</li>
+<li><strong>Material Selection</strong>: PETG or ABS.</li>
+<li><strong>Wall Loops</strong>: <strong>6 Wall Loops</strong>.</li>
+<li><strong>Flow Ratio (Extrusion Multiplier)</strong>: Increase from 0.98 to <strong>1.03</strong> (Over-extrude by +3–5%).</li>
+<li><strong>Nozzle Temperature Profile</strong>: Boost temperature by <strong>+10°C</strong> to maximize inter-layer polymer fusion.</li>
+<li><strong>Seam Style</strong>: Random or placed in staggered corners to avoid creating a continuous micro-porous vertical seam line.</li>
+<li><strong>Infill</strong>: 100% Solid Rectilinear (aligned at alternating 45°/135° angles).</li>
+<li><strong>Engineering Justification</strong>: Fluid leakage in 3D prints occurs along micro-voids in Z-seam lines or between thin perimeter walls. Over-extruding by +3–5% combined with 6 walls and elevated hotend temperatures forces molten polymer into adjacent toolpath gaps, forming a solid, non-porous barrier capable of retaining liquid pressure.</li>
+</ul>
+<h3><strong>Profile 08: Transparent / Translucent Light Diffusers &amp; Optical Lenses</strong></h3>
+<ul>
+<li><strong>Material Selection</strong>: 100% Pure Unpigmented Clear PETG.</li>
+<li><strong>Layer Height</strong>: 0.12 mm.</li>
+<li><strong>Wall Loops</strong>: <strong>0 Walls</strong> (Entire volume rendered as solid infill).</li>
+<li><strong>Infill</strong>: <strong>100% Aligned Rectilinear</strong> (Locked strictly to a single 0° or 90° direction across every layer plane; do not alternate layer angles).</li>
+<li><strong>Speed Profiles</strong>: Lock ALL speeds to <strong>20 – 30 mm/s</strong>.</li>
+<li><strong>Cooling Fans</strong>: <strong>0% Part Cooling Fan</strong> (Complete fan deactivation).</li>
+<li><strong>Nozzle Temperature Profile</strong>: Boost temperature to upper safety threshold (<strong>255°C – 260°C</strong>).</li>
+<li><strong>Ironing</strong>: Disabled.</li>
+<li><strong>Engineering Justification</strong>: Light scattering and opacity are caused by air gaps, boundary perimeters, and internal light refraction across alternating toolpath lines. Printing with zero wall loops, 100% single-direction aligned rectilinear infill, high thermal energy (260°C), and zero fan cooling allows molten PETG strands to flow together into a unified mass, producing optically clear translucent structures.</li>
+</ul>
+<h3><strong>Profile 09: Flexible Phone Cases, Gaskets &amp; Shock Dampers (TPU)</strong></h3>
+<ul>
+<li><strong>Feed Architecture</strong>: <strong>EXTERNAL REAR SPOOL ONLY</strong> (Bypass AMS completely).</li>
+<li><strong>Extruder Selection</strong>: <strong>Main Toolhead Direct-Drive Only</strong>.</li>
+<li><strong>Layer Height</strong>: 0.20 mm.</li>
+<li><strong>Wall Loops</strong>: 4. <strong>Top/Bottom Shells</strong>: 4 Top / 4 Bottom.</li>
+<li><strong>Infill</strong>: 15% – 30% Gyroid (Gyroid provides clean elastic deformation under compression).</li>
+<li><strong>Speed Profiles</strong>: Lock all print speeds to <strong>30 – 45 mm/s</strong>.</li>
+<li><strong>Max Volumetric Flow Limit</strong>: Restrict to <strong>3.5 mm³/s</strong> in Filament Settings.</li>
+<li><strong>Retraction Distance</strong>: Reduce to <strong>0.5 mm – 1.0 mm</strong> (or disable entirely). Retraction Speed: 20 mm/s.</li>
+<li><strong>Avoid Crossing Walls</strong>: Enabled (Keeps the nozzle inside model perimeters during travel to prevent stringing).</li>
+<li><strong>Engineering Justification</strong>: Flexible elastomers (TPU 95A/85A) buckle under high backpressure or rapid retractions. Constraining volumetric flow to 3.5 mm³/s and printing at slow speeds prevents filament binding in the extruder gears. Disabling AMS routing prevents soft filament from jamming inside the long PTFE feed lines.</li>
+</ul>
+<h3><strong>Profile 10: High-Heat ABS / ASA / PC Industrial Structural Parts</strong></h3>
+<ul>
+<li><strong>Enclosure Hardware Configuration</strong>: <strong>Active Chamber Heating Enabled: 65°C</strong>.</li>
+<li><strong>Build Plate &amp; Adhesive</strong>: Engineering Plate at <strong>100°C – 110°C</strong> with liquid glue release agent.</li>
+<li><strong>Brim Parameters</strong>: Outer Brim Only: 8 mm – 12 mm width, Brim-Object Gap: 0.05 mm.</li>
+<li><strong>Wall Loops</strong>: 5. <strong>Top/Bottom Shells</strong>: 5 Top / 5 Bottom.</li>
+<li><strong>Infill</strong>: 30% Gyroid.</li>
+<li><strong>Cooling Fans</strong>: Part Cooling Fan: 0% – 20% Max. Exhaust Fan: Off during print.</li>
+<li><strong>Purify Air at Print End</strong>: Enabled (Runs carbon air filter circuit for 5 minutes post-print before opening door).</li>
+<li><strong>Engineering Justification</strong>: High-temperature polymers (ABS, ASA, PC) exhibit high thermal contraction coefficients. Uncontrolled thermal gradient drops cause corner lifting, frame bowing, and structural layer splitting. Elevating the active internal chamber to 65°C keeps ambient temperatures above the material&#x27;s internal stress relief threshold, preventing shrinkage warping across large functional builds.</li>
+</ul>
+<h3><strong>Profile 11: Multi-Color Face-Down Signage, Keychains &amp; Souvenirs</strong></h3>
+<ul>
+<li><strong>Build Plate Selection</strong>: <strong>Textured PEI Plate</strong> (Yields a textured finish that conceals toolpath seam lines on the face).</li>
+<li><strong>First Layer Settings</strong>: First Layer Height: 0.20 mm. First Layer Speed: <strong>25 mm/s</strong>.</li>
+<li><strong>Wall Generator</strong>: Arachne (Ensures thin text and sharp logo corners slice cleanly).</li>
+<li><strong>Print Sequence Strategy</strong>: Configure filament order to print the <strong>Lightest Color First</strong> (e.g., White) and the <strong>Darkest Color Last</strong> (e.g., Black).</li>
+<li><strong>Prime Tower</strong>: Enabled (Prevents cross-color bleed during initial toolhead positioning).</li>
+<li><strong>Flush Volumes Ratio</strong>: Increase to <strong>1.2</strong> when flushing dark pigments to white.</li>
+<li><strong>Engineering Justification</strong>: Depositing light pigments first prevents residual dark pigment particles on the nozzle tip from dragging across and contaminating visible front face surfaces. Arachne wall generation preserves small text geometry, while slow initial speeds ensure clean line adhesion on the PEI surface.</li>
+</ul>
+<h3><strong>Profile 12: Complex Overhang Parts Using Dual-Nozzle Support Interface</strong></h3>
+<ul>
+<li><strong>Extruder Assignment</strong>:</li>
+<ul>
+<li><strong>Main Nozzle (Direct Drive)</strong>: Primary Structural Model Filament (e.g., Main Slot 1: Generic PLA).</li>
+<li><strong>Auxiliary Nozzle (Rear Bowden)</strong>: Dedicated Support Interface Filament (e.g., Aux Slot: Generic PETG OR Support for PLA).</li>
+</ul>
+<li><strong>Support Settings</strong>:</li>
+<ul>
+<li>Support Type: Tree or Normal.</li>
+<li><strong>Top Z Distance</strong>: <strong>0.00 mm</strong> (Zero-gap setting).</li>
+<li><strong>Top Interface Layers</strong>: <strong>3 Layers</strong>.</li>
+<li><strong>Top Interface Spacing</strong>: <strong>0.00 mm</strong> (Solid interface roof).</li>
+<li>Support/Object XY Distance: 0.40 mm.</li>
+</ul>
+<li><strong>Prime Tower Configuration</strong>: <strong>Enabled</strong> (Required to stabilize pressure across both hotends during swaps).</li>
+<li><strong>Engineering Justification</strong>: Because PLA and PETG will not thermally bond to each other under normal extrusion conditions, PETG acts as an ideal release interface for PLA model structures (and vice versa). Setting Top Z Distance and Interface Spacing to 0.00 mm creates a flat support ceiling that supports the model overhang, yielding a smooth underside surface after peeling the support away post-print.</li>
+</ul>
+<hr class="section-divider">
+<h1><strong>SECTION 4: Master Encyclopedia of FDM 3D Printing Failures &amp; Countermeasures</strong></h1>
+<p>This master diagnostic matrix lists root physical causes, slicer settings adjustments, and Bambu Lab X2D hardware remedies for FDM 3D printing failure modes.</p>
+<div class="table-toolbar">
+<span class="table-badge">Table 3 &middot; 32 rows</span>
+<input type="text" class="table-search" placeholder="Filter rows in this table..." oninput="filterTable('tab3_tbl_3', this.value)">
+</div>
+<div class="table-container"><table id="tab3_tbl_3" class="data-table"><thead><tr>
+<th>ID</th>
+<th>Failure Classification</th>
+<th>Primary Physical Cause</th>
+<th>Core Slicer / Hardware Remedy</th>
+</tr></thead><tbody>
+<tr>
+<td>01</td>
+<td>First Layer Detachment / Spaghetti</td>
+<td>Insufficient initial bed adhesion</td>
+<td>Clean plate with IPA / Lower 1st L speed</td>
+</tr>
+<tr>
+<td>02</td>
+<td>Warping / Corner Lifting</td>
+<td>Thermal differential contraction</td>
+<td>Enable Active Chamber 65°C / Add Brim</td>
+</tr>
+<tr>
+<td>03</td>
+<td>Elephant&#x27;s Foot (Flared Base)</td>
+<td>Excess initial layer compression</td>
+<td>Adjust Elephant Foot Comp (0.15 mm)</td>
+</tr>
+<tr>
+<td>04</td>
+<td>First Layer Ripples (&quot;Tiger Stripes&quot;)</td>
+<td>Nozzle dragging / Over-extrusion</td>
+<td>Calibrate flow ratio / Check Z-offset</td>
+</tr>
+<tr>
+<td>05</td>
+<td>First Layer Gaps</td>
+<td>Under-extrusion / Z-offset high</td>
+<td>Increase 1st layer line width to 0.50 mm</td>
+</tr>
+<tr>
+<td>06</td>
+<td>Stringing / Cobwebbing</td>
+<td>Material oozing during travel</td>
+<td>Calibrate retraction / Dry filament</td>
+</tr>
+<tr>
+<td>07</td>
+<td>Branching / Blobs on Travel</td>
+<td>Pressure buildup in hotend melt</td>
+<td>Enable Pressure Advance / Wipe on Loop</td>
+</tr>
+<tr>
+<td>08</td>
+<td>Z-Seam Blobs / Zits</td>
+<td>Retraction delay at layer start</td>
+<td>Enable Scarf Joint Seam / Coasting</td>
+</tr>
+<tr>
+<td>09</td>
+<td>Under-Extrusion</td>
+<td>Restricted polymer volumetric flow</td>
+<td>Check for nozzle clog / Increase temp</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Over-Extrusion</td>
+<td>High volumetric flow multiplier</td>
+<td>Decrease Flow Ratio (e.g. 0.98 -&gt; 0.94)</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Pillowing (Top Surface Holes)</td>
+<td>Insufficient top skin layers</td>
+<td>Increase Top Layers (5+) / Increase fan</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Layer Separation / Delamination</td>
+<td>Poor inter-layer thermal bonding</td>
+<td>Turn ON Active Chamber 65°C / Drop fan</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Layer Shifting (X/Y Step Loss)</td>
+<td>Toolhead physical collision</td>
+<td>Switch Gyroid infill / Tighten timing belt</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Ringing / Ghosting</td>
+<td>Frame resonance under accel</td>
+<td>Lower Outer Wall Accel / Run input shaper</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Vertical Fine Artifacts (VFA)</td>
+<td>Stepper motor cogging at low speed</td>
+<td>Shift print speed outside 40-70 mm/s band</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Salmon Skin Surface Texture</td>
+<td>Extruder gear tooth chatter</td>
+<td>Inspect &amp; clean drive gear teeth assemblies</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Overhang Curling / Sagging</td>
+<td>Slow cooling on steep angles</td>
+<td>Maximize Part Fan / Drop Overhang Speed</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Bridge Sagging</td>
+<td>Excess flow across open spans</td>
+<td>Lower Bridge Flow Ratio (0.85)</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Supports Fused to Model</td>
+<td>Z-Distance set too close</td>
+<td>Increase Top Z Distance to 0.20 mm</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Supports Collapsing Mid-Print</td>
+<td>Narrow support base instability</td>
+<td>Increase Tree Support trunk diameter</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Heat Curling on Overhangs</td>
+<td>Thermal accumulation on corners</td>
+<td>Increase minimum layer time / Lower temp</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Wet Filament Popping / Steam</td>
+<td>Hydrophilic moisture absorption</td>
+<td>Run AMS 2 Pro Active Drying at 65°C</td>
+</tr>
+<tr>
+<td>23</td>
+<td>Heat Creep / Cold-End Jamming</td>
+<td>Heat travel up hotend throat</td>
+<td>Keep chamber top open for PLA prints</td>
+</tr>
+<tr>
+<td>24</td>
+<td>Partial Nozzle Clogging</td>
+<td>Particulate buildup in hotend</td>
+<td>Perform cold pull / Move to 0.6 mm nozzle</td>
+</tr>
+<tr>
+<td>25</td>
+<td>Filament Grinding in Extruder</td>
+<td>Drive gears chewing filament strand</td>
+<td>Adjust gear tension / Check path clog</td>
+</tr>
+<tr>
+<td>26</td>
+<td>TPU Buckling in Feed Path</td>
+<td>Flexible strand wrapping in gear</td>
+<td>Restrict feed rate / Use Direct-Drive</td>
+</tr>
+<tr>
+<td>27</td>
+<td>Cardboard Spool Slipping in AMS</td>
+<td>Low rim friction on AMS rollers</td>
+<td>Install plastic rim adapters on spool</td>
+</tr>
+<tr>
+<td>28</td>
+<td>Dimensional Inaccuracy (Holes)</td>
+<td>Polymer shrinkage post-cooling</td>
+<td>Increase X-Y Hole Compensation (+0.10 mm)</td>
+</tr>
+<tr>
+<td>29</td>
+<td>Infill Ghosting (Outer Wall Lines)</td>
+<td>Infill pushing through perimeters</td>
+<td>Add more wall loops / Outer wall first</td>
+</tr>
+<tr>
+<td>30</td>
+<td>Nozzle Scraping Infill (Collisions)</td>
+<td>Nozzle dragging on grid cross</td>
+<td>Switch from Grid Infill to Gyroid</td>
+</tr>
+<tr>
+<td>31</td>
+<td>Dual-Nozzle Cross-Contamination</td>
+<td>Inactive hotend oozing on model</td>
+<td>Enable Prime Tower &amp; Retraction wipe</td>
+</tr>
+<tr>
+<td>32</td>
+<td>Print Welded / PEI Tearing</td>
+<td>Over-adhesion of PETG/TPU on PEI</td>
+<td>Apply liquid glue stick release agent</td>
+</tr>
+</tbody></table></div>
+<hr class="section-divider">
+<h2><strong>Detailed Diagnostic &amp; Countermeasure Entries</strong></h2>
+<h3><strong>01. First Layer Not Sticking / Spaghettification from Detachment</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: The first layer detaches mid-print, resulting in loose, tangled filament (&quot;spaghetti&quot;) pulled by the moving toolhead.</li>
+<li><strong>Root Physical Cause</strong>: Interfacial shear forces overcome polymer adhesion to the build plate. Caused by oil/grease contamination on the PEI surface, incorrect bed temperature, or excessive nozzle offset.</li>
+<li><strong>Slicer Countermeasure</strong>: Set <strong>First Layer Speed</strong> to 20 – 30 mm/s. Set <strong>First Layer Line Width</strong> to 0.50 mm. Ensure correct build plate profile is selected (Textured PEI vs. Smooth PEI).</li>
+<li><strong>Hardware Countermeasure</strong>: Wash the PEI plate thoroughly using warm water and dish soap (avoid unrefined IPA, which can spread oils). Re-run auto-bed leveling on the X2D touch screen.</li>
+</ul>
+<h3><strong>02. Warping / Corner Lifting (&quot;Banana Curl&quot;)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Flat rectangular bases lift at corner edges, creating a curved profile.</li>
+<li><strong>Root Physical Cause</strong>: Differential thermal contraction. As upper plastic layers cool and contract, they exert upward mechanical tension on the lower corners of the part.</li>
+<li><strong>Slicer Countermeasure</strong>: Enable <strong>Outer Brim Only</strong> (6 mm – 10 mm width, 0.10 mm gap). Increase bed temperature by +5°C. Lower part cooling fan speed for lower layers.</li>
+<li><strong>Hardware Countermeasure</strong>: On high-temp prints (ABS, ASA, PC), turn <strong>Active Chamber Heating ON (65°C)</strong>. Ensure printer enclosure doors and top glass lid remain fully closed to eliminate ambient drafts.</li>
+</ul>
+<h3><strong>03. Elephant&#x27;s Foot (Flared Bottom Edge)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: The initial 1–2 layers flare outward beyond the model&#x27;s intended vertical profile.</li>
+<li><strong>Root Physical Cause</strong>: Excessive initial Z-axis squish combined with high bed temperatures that keep early layers soft under the weight of upper extrusions.</li>
+<li><strong>Slicer Countermeasure</strong>: Set <strong>Elephant Foot Compensation</strong> to 0.12 mm – 0.18 mm. Lower bed temperature slightly after layer 1.</li>
+<li><strong>Hardware Countermeasure</strong>: Recalibrate Z-offset home height via the diagnostic system menu.</li>
+</ul>
+<h3><strong>04. First Layer Ripples / Waves (&quot;Tiger Stripes&quot;)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Wavy ridges, rough tearing, or raised plastic lines on the first layer surface.</li>
+<li><strong>Root Physical Cause</strong>: Nozzle height is too low relative to the bed, or the extruder is over-extruding. Pushed plastic has nowhere to go and squishes upward into adjacent rows.</li>
+<li><strong>Slicer Countermeasure</strong>: Reduce <strong>First Layer Flow Ratio</strong> from 1.0 down to 0.95. Reduce <strong>First Layer Line Width</strong> from 0.55 mm down to 0.48 mm.</li>
+<li><strong>Hardware Countermeasure</strong>: Clean debris or plastic droppings from the nozzle tip before auto-bed leveling so the nozzle touch sensor zeros accurately.</li>
+</ul>
+<h3><strong>05. Gaps Between First Layer Lines (Under-Squished First Layer)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Visible space between adjacent extrusion paths on the first layer; individual lines peel up independently.</li>
+<li><strong>Root Physical Cause</strong>: Nozzle Z-height is too high above the build plate, or initial layer extrusion width is set too narrow.</li>
+<li><strong>Slicer Countermeasure</strong>: Increase <strong>First Layer Line Width</strong> to 0.52 mm – 0.60 mm. Increase <strong>First Layer Flow Ratio</strong> to 1.02.</li>
+<li><strong>Hardware Countermeasure</strong>: Ensure the correct build plate preset is selected in Bambu Studio (Textured PEI automatically applies an extra -0.04 mm Z-squish offset).</li>
+</ul>
+<h3><strong>06. Stringing / Oozing / Cobwebbing (&quot;Hairy Prints&quot;)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Fine cobweb-like plastic threads stretching across open air gaps between printed regions.</li>
+<li><strong>Root Physical Cause</strong>: Plastic continues to ooze from the nozzle tip during non-printing travel moves due to gravity, internal melt pressure, or absorbed moisture.</li>
+<li><strong>Slicer Countermeasure</strong>: Enable <strong>Avoid Crossing Walls</strong>. Set Retraction Distance to 0.8 mm (Direct Drive) and Retraction Speed to 30 – 45 mm/s. Enable <strong>Wipe While Retracting</strong>.</li>
+<li><strong>Hardware Countermeasure</strong>: Dry the filament spool. Hydrophilic polymers (PETG, PA, PVA) will ooze regardless of retraction settings if saturated with water.</li>
+</ul>
+<h3><strong>07. Branching / Thick Blobs on Travel Moves</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Heavy tree-like plastic branches or thick blobs forming along travel paths.</li>
+<li><strong>Root Physical Cause</strong>: High internal melt pressure in the hotend chamber causes severe oozing that solidifies on adjacent walls during travel.</li>
+<li><strong>Slicer Countermeasure</strong>: Enable <strong>Pressure Advance / Flow Dynamics Calibration</strong>. Increase travel move speed to 500 mm/s to minimize transition times across gaps.</li>
+<li><strong>Hardware Countermeasure</strong>: Run auto-Flow Dynamics Calibration (K-value calibration) from the X2D menu for the target filament.</li>
+</ul>
+<h3><strong>08. Z-Seam Blobs, Zits, or Pits</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Raised zits or small pitted divots scattered along the vertical Z-seam line.</li>
+<li><strong>Root Physical Cause</strong>: Pressure spikes at the start of a perimeter loop cause outer blobs, while late retraction timing causes material starvation and pits.</li>
+<li><strong>Slicer Countermeasure</strong>: Enable <strong>Scarf Joint Seam</strong>. Set Seam Position to Aligned or Back (hiding it in internal corners). Adjust <strong>Extra Length on Restart</strong> to -0.02 mm³.</li>
+<li><strong>Hardware Countermeasure</strong>: Inspect the extruder drive gears for worn teeth that cause lag during retraction/un-retraction cycles.</li>
+</ul>
+<h3><strong>09. Under-Extrusion (Thin, Spongy, or Missing Layers)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Delaminated layer paths, visible gaps between lines, or fragile, porous part structures.</li>
+<li><strong>Root Physical Cause</strong>: Volumetric feed rate demands exceed the melt capacity of the hotend, or physical drag restricts filament entry into the extruder.</li>
+<li><strong>Slicer Countermeasure</strong>: Reduce overall <strong>Print Speed</strong>. Lower <strong>Max Volumetric Speed</strong> limit in Filament Settings (e.g., reduce PLA limit from 21 mm³/s down to 15 mm³/s). Increase <strong>Nozzle Temperature</strong> by +10°C.</li>
+<li><strong>Hardware Countermeasure</strong>: Inspect the hotend for a partial clog. Check the PTFE feed path for high friction or tight bends.</li>
+</ul>
+<h3><strong>10. Over-Extrusion (Rough Top Surfaces &amp; Excess Plastic)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Dimensional swelling, excess plastic buildup along perimeters, and rough, scraped top surfaces.</li>
+<li><strong>Root Physical Cause</strong>: Extrusion flow multiplier is set too high, feeding excess material for the target path geometry.</li>
+<li><strong>Slicer Countermeasure</strong>: Lower <strong>Flow Ratio</strong> in Filament Settings (e.g., from 1.00 to 0.94).</li>
+<li><strong>Hardware Countermeasure</strong>: Recalibrate filament packing density and run the manual Flow Rate Calibration utility in Bambu Studio.</li>
+</ul>
+<h3><strong>11. Pillowing (Bumps, Holes, or Swelling on Top Flat Surfaces)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Small bumps, dips, or open tear holes on flat top horizontal surfaces.</li>
+<li><strong>Root Physical Cause</strong>: Hot skin layers collapse into hollow infill cells below due to insufficient top layer counts or inadequate part fan cooling.</li>
+<li><strong>Slicer Countermeasure</strong>: Increase <strong>Top Shell Layers</strong> to at least 5 (minimum 1.0 mm thickness). Increase <strong>Sparse Infill Density</strong> to ≥ 20%. Increase <strong>Part Cooling Fan Speed</strong>.</li>
+<li><strong>Hardware Countermeasure</strong>: Verify the toolhead part cooling fan is running correctly during top skin extrusion.</li>
+</ul>
+<h3><strong>12. Layer Separation / Delamination / Thermal Cracking</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Horizontal splits or cracked layers along part walls, causing the model to break apart along layer lines.</li>
+<li><strong>Root Physical Cause</strong>: Insufficient inter-layer polymer diffusion. High thermal shrinkage forces pull cold layers apart before subsequent hot material can fuse to them.</li>
+<li><strong>Slicer Countermeasure</strong>: Turn <strong>OFF Part Cooling Fan</strong> (or limit to 10% – 20%). Increase <strong>Nozzle Temperature</strong>. Lower <strong>Print Speed</strong> to allow longer thermal dwell times.</li>
+<li><strong>Hardware Countermeasure</strong>: Turn <strong>Active Chamber Heating ON (65°C)</strong>. Ensure the printer enclosure remains closed throughout the print cycle.</li>
+</ul>
+<pre class="ascii-diagram">                  ┌─────────────────────────────────────────────────┐
+                  │        STRUCTURAL DELAMINATION DIAGNOSTIC       │
+                  └────────────────────────┬────────────────────────┘
+                                           │
+                         Is material ABS / ASA / PC / Nylon?
+                                           │
+                  ┌────────────────────────┴────────────────────────┐
+                  ▼                                                 ▼
+               [ YES ]                                           [ NO ]
+                  │                                                 │
+  ┌───────────────┴───────────────┐                 ┌───────────────┴───────────────┐
+  │ 1. Turn Active Chamber ON     │                 │ 1. Raise Nozzle Temp (+10°C)  │
+  │    to 65°C                    │                 │ 2. Reduce Part Cooling Fan %  │
+  │ 2. Set Cooling Fan to 0-15%   │                 │ 3. Decrease Layer Height      │
+  │ 3. Keep enclosure fully sealed│                 │ 4. Lower overall Print Speed  │
+  └───────────────────────────────┘                 └───────────────────────────────┘</pre>
+<h3><strong>13. Layer Shifting (Stair-Step Offset Along X or Y Axis)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: The print suddenly shifts horizontally along the X or Y axis mid-print, continuing the remaining layers out of alignment.</li>
+<li><strong>Root Physical Cause</strong>: Stepper motor step loss caused by high-speed toolhead collisions with curled infill, high mechanical resistance, or loose timing belts.</li>
+<li><strong>Slicer Countermeasure</strong>: Switch infill pattern from Grid to <strong>Gyroid</strong> or <strong>Cubic</strong> (eliminates mid-layer toolpath intersections). Lower <strong>Travel Acceleration</strong> to 10,000 mm/s².</li>
+<li><strong>Hardware Countermeasure</strong>: Check X/Y timing belt tension. Clean and grease CoreXY linear guide rods. Ensure toolhead cables do not catch on the frame.</li>
+</ul>
+<h3><strong>14. Ringing / Ghosting / Echo Ripples</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Shadow-like wave ripples echoing outward from sharp corners along flat wall surfaces.</li>
+<li><strong>Root Physical Cause</strong>: High toolhead acceleration causes mechanical frame vibration, which transfers to the hotend tip during sudden changes in direction.</li>
+<li><strong>Slicer Countermeasure</strong>: Lower <strong>Outer Wall Acceleration</strong> to 3,000 – 5,000 mm/s². Reduce <strong>Outer Wall Speed</strong> to 60 – 80 mm/s.</li>
+<li><strong>Hardware Countermeasure</strong>: Run <strong>Input Shaper Resonance Calibration</strong> from the X2D menu. Ensure the printer rests on a stable, non-flexing surface.</li>
+</ul>
+<h3><strong>15. VFA (Vertical Fine Artifacts / Motor Ripple Lines)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Fine, closely-spaced vertical lines running uniformly down flat perimeters, independent of Z-seams.</li>
+<li><strong>Root Physical Cause</strong>: Stepper motor rotor cogging resonance transferred through drive belts at specific constant linear speeds.</li>
+<li><strong>Slicer Countermeasure</strong>: Adjust <strong>Outer Wall Speed</strong> away from the motor resonance band (typically avoid 40 – 70 mm/s; run outer walls faster at 100+ mm/s or slower at &lt;30 mm/s).</li>
+<li><strong>Hardware Countermeasure</strong>: Check drive belt tracking for proper alignment on idler pulleys.</li>
+</ul>
+<h3><strong>16. Salmon Skin / Extruder Gear Patterning</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Diagonal repeating cross-hatch or diamond textures on smooth outer surfaces.</li>
+<li><strong>Root Physical Cause</strong>: Mechanical gear tooth chatter or drive gear eccentricity in the extruder motor assembly.</li>
+<li><strong>Slicer Countermeasure</strong>: Set <strong>Outer Wall Line Width</strong> to 0.45 mm to dampen extrusion width variations.</li>
+<li><strong>Hardware Countermeasure</strong>: Clean foreign debris out of the dual drive gear teeth in the toolhead extruder assembly.</li>
+</ul>
+<h3><strong>17. Overhang Curling / Drooping Undersides</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Overhang edges curl upward or droop, leaving sagging, rough underside surfaces.</li>
+<li><strong>Root Physical Cause</strong>: Inadequate air cooling allows hot polymer overhangs to deform under gravity before solidifying.</li>
+<li><strong>Slicer Countermeasure</strong>: Enable <strong>Slow Down for Overhangs</strong>. Set <strong>Overhang Speeds</strong> for 75–100% overhangs down to 10 – 15 mm/s. Set <strong>Part Cooling Fan</strong> to 100%.</li>
+<li><strong>Hardware Countermeasure</strong>: Ensure the front auxiliary housing fan is clear of dust and blowing directly onto the toolhead tip.</li>
+</ul>
+<h3><strong>18. Bridge Sagging / Drooping Horizontal Spans</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Loose, sagging strands beneath unsupported air gaps between pillars.</li>
+<li><strong>Root Physical Cause</strong>: Excessive extrusion volume or high feed speeds during bridge moves prevent polymer strands from staying under tension across the span.</li>
+<li><strong>Slicer Countermeasure</strong>: Reduce <strong>Bridge Flow Ratio</strong> to 0.85. Set <strong>Bridge Speed</strong> to 30 – 40 mm/s. Set <strong>Bridge Fan Speed</strong> to 100%.</li>
+<li><strong>Hardware Countermeasure</strong>: Keep ambient chamber temperature cooler when printing long PLA bridging spans.</li>
+</ul>
+<h3><strong>19. Supports Fused to Model / Impossible to Remove</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Support structures tear away model plastic or break off into the main part surface during removal.</li>
+<li><strong>Root Physical Cause</strong>: Insufficient Z clearance allows support interface layers to thermally fuse directly into lower model surfaces.</li>
+<li><strong>Slicer Countermeasure</strong>: Increase <strong>Top Z Distance</strong> from 0.14 mm to 0.20 mm. Set <strong>Top Interface Spacing</strong> to 0.5 mm.</li>
+<li><strong>Hardware Countermeasure</strong>: Use dedicated support materials (e.g., PETG interface for PLA model) and set <strong>Top Z Distance</strong> to 0.00 mm.</li>
+</ul>
+<h3><strong>20. Supports Knocked Over / Collapsing Mid-Print</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Tall support columns snap or topple over mid-print, causing floating spaghetti extrusions above.</li>
+<li><strong>Root Physical Cause</strong>: Narrow support column bases lack sufficient bed surface area and tip over under toolhead contact or frame vibration.</li>
+<li><strong>Slicer Countermeasure</strong>: Switch to <strong>Tree Supports</strong>. Increase <strong>Tree Support Branch Diameter</strong> and <strong>Branch Angle</strong>. Enable <strong>Support Brims</strong>.</li>
+<li><strong>Hardware Countermeasure</strong>: Ensure the build plate is clean and free of fingerprints to maintain baseline adhesion beneath support bases.</li>
+</ul>
+<h3><strong>21. Curling Corners on Steep Overhangs (&quot;Heat Curling&quot;)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Unsupported sharp corners on sloped walls warp upward, causing physical collisions with the nozzle tip on subsequent passes.</li>
+<li><strong>Root Physical Cause</strong>: Heat accumulates in small overhang zones due to insufficient layer dwell time, causing thin polymer layers to warp upward.</li>
+<li><strong>Slicer Countermeasure</strong>: Increase <strong>Minimum Layer Time</strong> under Cooling settings to 8 – 10 seconds. Reduce <strong>Nozzle Temperature</strong> by 5°C. Enable <strong>Tree Supports</strong> under the curling overhang zones.</li>
+<li><strong>Hardware Countermeasure</strong>: Direct an external auxiliary cooling fan toward the build area, or print a second identical part on the same plate to increase cycle time per layer.</li>
+</ul>
+<h3><strong>22. Wet Filament Popping / Steaming / Rough Pitted Surface</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Sputtering or popping noises at the hotend tip, steam escaping the nozzle, and pitted surface texture across outer walls.</li>
+<li><strong>Root Physical Cause</strong>: Moisture absorbed by hydrophilic polymers expands into steam bubbles inside the internal hotend melt chamber, creating voids in extruded lines.</li>
+<li><strong>Slicer Countermeasure</strong>: Adjust flow settings post-drying. Slicer settings cannot compensate for absorbed moisture in saturated filament.</li>
+<li><strong>Hardware Countermeasure</strong>: Load filament into the <strong>AMS 2 Pro</strong> and activate <strong>65°C Active Drying</strong> for 8–12 hours prior to printing.</li>
+</ul>
+<pre class="ascii-diagram">                   ┌─────────────────────────────────────────────────┐
+                   │          HYDROPHILIC MOISTURE DIAGNOSTIC        │
+                   └────────────────────────┬────────────────────────┘
+                                            │
+                       Are you experiencing popping noises, steam,
+                           or pitted outer wall surfaces?
+                                            │
+                   ┌────────────────────────┴────────────────────────┐
+                   ▼                                                 ▼
+                [ YES ]                                           [ NO ]
+                   │                                                 │
+  ┌────────────────┴───────────────┐                ┌────────────────┴───────────────┐
+  │ 1. DO NOT alter Slicer Profile │                │ Filament moisture level is     │
+  │ 2. Load spool into AMS 2 Pro   │                │ nominal. Proceed with standard │
+  │ 3. Set Active Drying to 65°C   │                │ slicing configurations.        │
+  │ 4. Dry for 8 - 12 Hours        │                └────────────────────────────────┘
+  └────────────────────────────────┘</pre>
+<h3><strong>23. Heat Creep / Cold-End Jamming Mid-Print</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Print fails hours into a job; extruder motor continues turning, but filament stops feeding completely.</li>
+<li><strong>Root Physical Cause</strong>: Heat radiates upward from the hotend throat into the cold-end heatsink, softening raw filament inside the drive gears and causing a thermal plug jam.</li>
+<li><strong>Slicer Countermeasure</strong>: Avoid printing low-temp polymers (PLA) with bed temperatures &gt;60°C inside enclosed chambers.</li>
+<li><strong>Hardware Countermeasure</strong>: When printing PLA in high ambient room temperatures, remove the top glass lid or prop open the front enclosure door to maintain internal chamber temperatures below 35°C.</li>
+</ul>
+<h3><strong>24. Nozzle Clogging / Partial Blockage (CF, Wood, Glow Materials)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Extrusion stops intermittently; hotend extrudes thin, curling wisps into open air.</li>
+<li><strong>Root Physical Cause</strong>: Particulate inclusions (carbon fibers, wood particles, glow-in-the-dark powders) aggregate inside small nozzle orifices, restricting flow.</li>
+<li><strong>Slicer Countermeasure</strong>: When using composite filaments, switch to a <strong>0.6 mm Nozzle Profile</strong> in Bambu Studio.</li>
+<li><strong>Hardware Countermeasure</strong>: Perform a high-temperature atomic pull (&quot;cold pull&quot;) using nylon cleaning filament to clear particle aggregations from the hotend chamber.</li>
+</ul>
+<h3><strong>25. Grinding / Stripped Filament in Extruder Gears</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Fine plastic dust accumulates around extruder drive gears; filament strand exhibits carved crescent bite marks and refuses to advance.</li>
+<li><strong>Root Physical Cause</strong>: Drive gears strip material off the filament strand because internal nozzle clogs or high feed resistance prevent forward motion.</li>
+<li><strong>Slicer Countermeasure</strong>: Lower <strong>Print Speed</strong>. Lower <strong>Volumetric Flow Limit</strong>.</li>
+<li><strong>Hardware Countermeasure</strong>: Disassemble the toolhead drive housing and clear packed plastic shavings out of the dual gear teeth. Adjust drive gear tension screws.</li>
+</ul>
+<h3><strong>26. TPU Buckling / Wrapping in Extruder or AMS Feed Tubes</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Soft flexible TPU filament wraps around internal drive gears or jams inside PTFE feed lines, stopping extrusion.</li>
+<li><strong>Root Physical Cause</strong>: High friction in long PTFE paths or rapid extrusion commands cause flexible filaments to flex laterally and bind inside the drive path.</li>
+<li><strong>Slicer Countermeasure</strong>: Lock max <strong>Volumetric Speed</strong> to 3.5 mm³/s. Set <strong>Print Speed</strong> to ≤ 35 mm/s. Turn <strong>OFF Retraction</strong> (or limit to ≤ 0.5 mm).</li>
+<li><strong>Hardware Countermeasure</strong>: Route TPU exclusively through the <strong>Direct-Drive Main Toolhead</strong> via the external rear spool mount. Never feed TPU through the AMS unit or auxiliary Bowden paths.</li>
+</ul>
+<h3><strong>27. AMS 2 Pro Cardboard Spool Slipping / Retraction Failure</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: AMS 2 Pro motor spins during retraction/feed cycles, but the cardboard spool slips on the drive rollers, causing feeder overload errors.</li>
+<li><strong>Root Physical Cause</strong>: Friction between cardboard spool edges and rubber AMS drive rollers is insufficient, or deformed cardboard rims prevent smooth rotation.</li>
+<li><strong>Slicer Countermeasure</strong>: N/A (Hardware mechanical issue).</li>
+<li><strong>Hardware Countermeasure</strong>: Install snap-on plastic outer rim adapters around the cardboard spool edges, or transfer the filament onto an official Bambu reusable plastic spool.</li>
+</ul>
+<h3><strong>28. Dimensional Inaccuracy (Undersized Holes / Tight Press-Fits)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Printed bolts, pins, or bearings will not fit into vertical circular cutouts, despite matching CAD dimensions.</li>
+<li><strong>Root Physical Cause</strong>: Extruded plastic curves around circular arcs under hoop tension, causing internal hole boundaries to shrink inward upon cooling.</li>
+<li><strong>Slicer Countermeasure</strong>: Set <strong>X-Y Hole Compensation</strong> to +0.08 mm – +0.12 mm. Set <strong>Wall Generator</strong> to Arachne.</li>
+<li><strong>Hardware Countermeasure</strong>: Verify structural belt tension levels to eliminate mechanical axis distortion.</li>
+</ul>
+<h3><strong>29. Infill Showing Through Outer Walls (&quot;Infill Ghosting&quot;)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Internal infill patterns (such as grid lines) remain visible as shadow textures on smooth outer surfaces.</li>
+<li><strong>Root Physical Cause</strong>: Infill extrusions overlap too far into inner wall perimeters, pushing outer cosmetic walls outward at intersection points.</li>
+<li><strong>Slicer Countermeasure</strong>: Increase <strong>Wall Loops</strong> count to ≥ 3. Set Wall Printing Order to <strong>Outer/Inner</strong> or <strong>Inner/Outer</strong>. Lower <strong>Infill/Wall Overlap</strong> from 15% down to 8%.</li>
+<li><strong>Hardware Countermeasure</strong>: N/A (Resolved entirely via slicer perimeter path routing).</li>
+</ul>
+<h3><strong>30. Nozzle Scraping / Clicking Against Infill (Grid Crossing Collision)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: The nozzle makes loud clicking or scraping noises as it passes across printed infill areas during high-speed travel.</li>
+<li><strong>Root Physical Cause</strong>: Grid and Rectilinear infill patterns cross extruded lines on the same layer plane, causing material buildup at intersection points that hits the nozzle tip.</li>
+<li><strong>Slicer Countermeasure</strong>: Switch infill pattern to <strong>Gyroid</strong>, <strong>Cubic</strong>, or <strong>3D Honeycomb</strong> (patterns that never cross paths on a single layer plane). Enable <strong>Z Hop on Retraction</strong> (0.4 mm).</li>
+<li><strong>Hardware Countermeasure</strong>: N/A.</li>
+</ul>
+<h3><strong>31. Dual-Nozzle Oozing / Cross-Color Contamination on X2D</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Droplets from an idle nozzle drag across active model surfaces, causing dark streaks or color blobs on secondary extrusions.</li>
+<li><strong>Root Physical Cause</strong>: Thermal expansion causes residual plastic in the idle hotend chamber to drip out while docked over the active print area.</li>
+<li><strong>Slicer Countermeasure</strong>: Enable <strong>Prime Tower</strong>. Enable <strong>Nozzle Temperature Standby Delta</strong> (lowers idle hotend temp by 30°C when docked). Enable <strong>Wipe Tower / Extruder Retraction Clean</strong>.</li>
+<li><strong>Hardware Countermeasure</strong>: Inspect the physical silicone wiper blades on the rear X2D toolhead dock; replace worn wiper pads.</li>
+</ul>
+<h3><strong>32. Print Welded Permanently to Build Plate (PETG/TPU Tearing PEI)</strong></h3>
+<ul>
+<li><strong>Visual Symptom</strong>: Printed PETG or TPU parts tear away chunks of PEI coating or damage the sheet surface during removal.</li>
+<li><strong>Root Physical Cause</strong>: Chemical affinity between PETG/TPU and PEI surface coatings creates a direct molecular bond at high bed temperatures.</li>
+<li><strong>Slicer Countermeasure</strong>: Adjust bed temperature to match material supplier recommendations. Do not over-squish initial layers.</li>
+<li><strong>Hardware Countermeasure</strong>: Always apply a uniform layer of liquid glue stick or PVA release agent onto smooth PEI plates when printing PETG or TPU. Allow the build plate to cool completely to room temperature (below 30°C) before attempting part removal.</li>
+</ul>
+  </section>
+</main>
+
+<script>
+  function switchTab(tabId, btn) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
+    document.getElementById(tabId).classList.add('active');
+    btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function filterTable(tableId, query) {
+    const filter = query.toLowerCase().trim();
+    const table = document.getElementById(tableId);
+    if (!table) return;
+    const rows = table.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      row.style.display = text.includes(filter) ? '' : 'none';
+    });
+  }
+</script>
+
+</body>
+</html>
